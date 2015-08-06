@@ -1,0 +1,11 @@
+{
+    "name": "phlib/logger",
+    "description": "Additional Logging Classes",
+    "authors": [
+        {
+            "name": "Adam Whale",
+            "email": "adam.whale@emailcenteruk.com"
+        }
+    ],
+    "require": {}
+}
