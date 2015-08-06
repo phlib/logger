@@ -7,5 +7,12 @@
             "email": "adam.whale@emailcenteruk.com"
         }
     ],
-    "require": {}
+    "require": {
+        "psr/log": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phlib\\Logger\\": "src"
+        }
+    }
 }
