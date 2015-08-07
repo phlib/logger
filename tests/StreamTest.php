@@ -1,18 +1,11 @@
 <?php
 namespace Phlib\Logger\Test;
 
-use org\bovigo\vfs\vfsStreamDirectory;
-use org\bovigo\vfs\vfsStreamWrapper;
 use Phlib\Logger\Stream;
 use Psr\Log\LogLevel;
 
 class StreamTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-        vfsStreamWrapper::register();
-        vfsStreamWrapper::setRoot(new vfsStreamDirectory('streamDir'));
-    }
 
     public function testIsPsrLog()
     {
