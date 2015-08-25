@@ -23,8 +23,10 @@ $loggerConfig = [
     'default' => [ // logger config identifier, used as facility/name in log messages
         // multiple logger entries becomes a collection logger
         [
-            'name'  => 'stream',                 // name of the logger type (stream, gelf...)
-            'level' => \Psr\Log\LogLevel::ERROR, // the level of log messages to include (optional)
+            // name of the logger type (stream, gelf...)
+            'name'  => 'stream',
+            // the level of log messages to include (optional)
+            'level' => \Psr\Log\LogLevel::ERROR, 
              // logger specific parameters
             'path'  => '/var/log/my_app.log'
         ],
