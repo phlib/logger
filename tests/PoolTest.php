@@ -1,7 +1,8 @@
 <?php
 
-namespace Phlib\Logger;
+namespace Phlib\Logger\Test;
 
+use Phlib\Logger\Pool;
 use Psr\Log\LogLevel;
 
 class PoolTest extends \PHPUnit_Framework_TestCase

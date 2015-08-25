@@ -1,7 +1,8 @@
 <?php
 
-namespace Phlib\Logger;
+namespace Phlib\Logger\Test;
 
+use Phlib\Logger\Factory;
 use Psr\Log\LogLevel;
 
 class FactoryTest extends \PHPUnit_Framework_TestCase
