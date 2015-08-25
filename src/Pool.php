@@ -72,6 +72,23 @@ class Pool
 
     /**
      * @param string $name
+     * @return Collection
+     */
+    public function getLoggerCollection($name)
+    {
+        $logger = $this->getLogger($name);
+
+        if (!$logger instanceof Collection) {
+            $logger = $this->loggerFactory->createCollectionLogger($name, [
+                'loggers' => [$logger]
+            ]);
+        }
+
+        return $logger;
+    }
+
+    /**
+     * @param string $name
      * @return LoggerInterface
      */
     protected function createLogger($name)
