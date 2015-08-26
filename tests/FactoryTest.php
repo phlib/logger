@@ -37,6 +37,18 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
     }
 
+    public function testCreateCollectionLoggerExistingLogger()
+    {
+        $existingLogger = $this->getMock('\Psr\Log\LoggerInterface');
+
+        $factory = new Factory();
+        $logger  = $factory->createCollectionLogger('test', [
+            'loggers' => [$existingLogger]
+        ]);
+
+        $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
+    }
+
     public function testCreateLoggerStreamUnfiltered()
     {
         $fh = fopen('php://memory', 'a');

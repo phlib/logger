@@ -139,4 +139,39 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($logger, $pool->getLogger('test'));
     }
+
+    public function testGetLoggerCollection()
+    {
+        $streamConfig = [
+            'name' => 'stream',
+        ];
+
+        $config = [
+            'test' => $streamConfig
+        ];
+
+        $factory          = $this->getMock('\Phlib\Logger\Factory');
+        $streamLogger     = $this->getMockBuilder('\Phlib\Logger\Stream')->disableOriginalConstructor()->getMock();
+        $collectionLogger = $this->getMock('\Phlib\Logger\Collection');
+        $factory->expects($this->once())
+            ->method('createLogger')
+            ->with(
+                $this->equalTo('test'),
+                $this->equalTo($streamConfig)
+            )
+            ->will($this->returnValue($streamLogger));
+        $factory->expects($this->once())
+            ->method('createCollectionLogger')
+            ->with(
+                $this->equalTo('test'),
+                $this->equalTo([
+                    'loggers' => [$streamLogger]
+                ])
+            )
+            ->will($this->returnValue($collectionLogger));
+
+        $pool = new Pool($config, $factory);
+
+        $this->assertSame($collectionLogger, $pool->getLoggerCollection('test'));
+    }
 }

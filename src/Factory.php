@@ -56,12 +56,14 @@ class Factory
     public function createCollectionLogger($name, $config)
     {
         $loggerCollection = new Collection();
-        foreach ($config['loggers'] as $index => $loggerConfig) {
-            try {
-                $logger = $this->createLogger($name, $loggerConfig);
-            } catch (\DomainException $e) {
-                $message = sprintf('%s at index %d', $e->getMessage(), $index);
-                throw new \DomainException($message, null, $e);
+        foreach ($config['loggers'] as $index => $logger) {
+            if (!$logger instanceof LoggerInterface) {
+                try {
+                    $logger = $this->createLogger($name, $logger);
+                } catch (\DomainException $e) {
+                    $message = sprintf('%s at index %d', $e->getMessage(), $index);
+                    throw new \DomainException($message, null, $e);
+                }
             }
             $loggerCollection->add($logger);
         }
