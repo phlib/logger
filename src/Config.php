@@ -58,13 +58,4 @@ class Config
         return $loggerConfig;
     }
 
-    /**
-     * @param string $name
-     * @return array
-     */
-    public function __get($name)
-    {
-        return $this->getLoggerConfig($name);
-    }
-
 }

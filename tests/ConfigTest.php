@@ -19,7 +19,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             'loggers' => []
         ];
 
-        $this->assertEquals($expected, $config->test);
+        $this->assertEquals($expected, $config->getLoggerConfig('test'));
     }
 
     public function testStream()
@@ -35,7 +35,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $config = new Config($configArray);
 
-        $this->assertEquals($streamConfig, $config->test);
+        $this->assertEquals($streamConfig, $config->getLoggerConfig('test'));
     }
 
     public function testCollectionCoerce()
@@ -59,7 +59,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $this->assertEquals($expected, $config->test);
+        $this->assertEquals($expected, $config->getLoggerConfig('test'));
     }
 
     public function testAlias()
@@ -78,6 +78,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $config = new Config($configArray);
 
-        $this->assertEquals($streamConfig, $config->test);
+        $this->assertEquals($streamConfig, $config->getLoggerConfig('test'));
     }
 }
