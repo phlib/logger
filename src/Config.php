@@ -6,7 +6,7 @@ namespace Phlib\Logger;
  * Class Config
  * @package Phlib\Logger
  */
-class Config
+class Config implements ConfigInterface
 {
     /**
      * @var array

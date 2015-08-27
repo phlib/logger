@@ -12,7 +12,7 @@ class Pool
 {
 
     /**
-     * @var Config
+     * @var ConfigInterface
      */
     protected $config;
 
@@ -32,10 +32,10 @@ class Pool
     protected $loggerFactory;
 
     /**
-     * @param Config $config
+     * @param ConfigInterface $config
      * @param Factory $loggerFactory
      */
-    public function __construct(Config $config, Factory $loggerFactory)
+    public function __construct(ConfigInterface $config, Factory $loggerFactory)
     {
         $this->config        = $config;
         $this->loggerFactory = $loggerFactory;
