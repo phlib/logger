@@ -12,7 +12,7 @@ class Pool
 {
 
     /**
-     * @var array
+     * @var Config
      */
     protected $config;
 
@@ -32,10 +32,10 @@ class Pool
     protected $loggerFactory;
 
     /**
-     * @param array $config
+     * @param Config $config
      * @param Factory $loggerFactory
      */
-    public function __construct(array $config, Factory $loggerFactory)
+    public function __construct(Config $config, Factory $loggerFactory)
     {
         $this->config        = $config;
         $this->loggerFactory = $loggerFactory;
@@ -93,21 +93,7 @@ class Pool
      */
     protected function createLogger($name)
     {
-        $loggerConfig = $name;
-        do {
-            $loggerConfig = isset($this->config[$loggerConfig]) ? $this->config[$loggerConfig] : [];
-        } while (is_string($loggerConfig));
-
-        if (!is_array($loggerConfig)) {
-            $loggerConfig = [];
-        }
-
-        if (!isset($loggerConfig['name'])) {
-            $loggerConfig = [
-                'name'    => Factory::LOGGER_COLLECTION,
-                'loggers' => $loggerConfig
-            ];
-        }
+        $loggerConfig = $this->config->getLoggerConfig($name);
 
         return $this->loggerFactory->createLogger($this->prefix . $name, $loggerConfig);
     }

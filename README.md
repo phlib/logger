@@ -51,7 +51,10 @@ $loggerConfig = [
 Creation of logger pool
 
 ``` php
-$loggerPool = new \Phlib\Logger\Pool($loggerConfig, new \Phlib\Logger\Factory());
+$loggerPool = new \Phlib\Logger\Pool(
+    new \Phlib\Logger\Config($loggerConfig), 
+    new \Phlib\Logger\Factory()
+);
 
 ```
 
