@@ -80,4 +80,20 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($streamConfig, $config->getLoggerConfig('test'));
     }
+
+    public function testInvalidLoggerConfigType()
+    {
+        $configArray = [
+            'test' => false
+        ];
+
+        $config = new Config($configArray);
+
+        $expected = [
+            'name'    => Factory::LOGGER_COLLECTION,
+            'loggers' => []
+        ];
+
+        $this->assertEquals($expected, $config->getLoggerConfig('test'));
+    }
 }
