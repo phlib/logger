@@ -95,7 +95,7 @@ class Pool
     {
         $loggerConfig = $this->config->getLoggerConfig($name);
 
-        return $this->loggerFactory->createLogger($this->prefix . $name, $loggerConfig);
+        return $this->loggerFactory->createLogger($this->getPrefix() . $name, $loggerConfig);
     }
 
     /**
