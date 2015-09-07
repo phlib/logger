@@ -49,6 +49,37 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
     }
 
+    public function testCreateCollectionLoggerWithConfig()
+    {
+        $gelfConfig = [
+            'name' => Factory::LOGGER_GELF,
+            'host' => '127.0.0.1'
+        ];
+
+        $factory = new Factory();
+        $logger  = $factory->createCollectionLogger('test', [
+            'loggers' => [$gelfConfig]
+        ]);
+
+        $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
+    }
+
+    /**
+     * @expectedException \DomainException
+     * @expectedExceptionMessageRegExp /at index 0$/
+     */
+    public function testCreateCollectionLoggerWithInvalidConfig()
+    {
+        $invalidConfig = [
+            'name' => '(invalid)',
+        ];
+
+        $factory = new Factory();
+        $factory->createCollectionLogger('test', [
+            'loggers' => [$invalidConfig]
+        ]);
+    }
+
     public function testCreateLoggerStreamUnfiltered()
     {
         $fh = fopen('php://memory', 'a');
