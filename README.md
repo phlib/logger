@@ -23,15 +23,15 @@ $loggerConfig = [
     'default' => [ // logger config identifier, used as facility/name in log messages
         // multiple logger entries becomes a collection logger
         [
-            // name of the logger type (stream, gelf...)
-            'name'  => 'stream',
+            // logger type (stream, gelf...)
+            'type'  => 'stream',
             // the level of log messages to include (optional)
             'level' => \Psr\Log\LogLevel::ERROR, 
              // logger specific parameters
             'path'  => '/var/log/my_app.log'
         ],
         [
-            'name'  => 'gelf',                
+            'type'  => 'gelf',                
             'level' => \Psr\Log\LogLevel::INFO,
              // logger specific parameters
             'host'  => '127.0.0.1',
@@ -40,7 +40,7 @@ $loggerConfig = [
     ],
     'application' => 'default', // alias to another logger config
     'api' => [
-        'name' => 'gelf',
+        'type' => 'gelf',
         'host' => '127.0.0.1',
         'port' => 12201 
     ]

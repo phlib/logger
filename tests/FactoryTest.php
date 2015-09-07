@@ -52,7 +52,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateCollectionLoggerWithConfig()
     {
         $gelfConfig = [
-            'name' => Factory::LOGGER_GELF,
+            'type' => Factory::LOGGER_TYPE_GELF,
             'host' => '127.0.0.1'
         ];
 
@@ -71,7 +71,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateCollectionLoggerWithInvalidConfig()
     {
         $invalidConfig = [
-            'name' => '(invalid)',
+            'type' => '(invalid)',
         ];
 
         $factory = new Factory();
@@ -86,7 +86,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new Factory();
         $logger  = $factory->createLogger('test', [
-            'name' => 'stream',
+            'type' => 'stream',
             'path' => $fh
         ]);
 
@@ -97,7 +97,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $factory = new Factory();
         $logger  = $factory->createLogger('test', [
-            'name' => 'gelf',
+            'type' => 'gelf',
             'host' => '127.0.0.1'
         ]);
 
@@ -108,7 +108,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $factory = new Factory();
         $logger  = $factory->createLogger('test', [
-            'name'    => 'collection',
+            'type'    => 'collection',
             'loggers' => []
         ]);
 
@@ -121,7 +121,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new Factory();
         $logger  = $factory->createLogger('test', [
-            'name'  => 'stream',
+            'type'   => 'stream',
             'level' => LogLevel::ERROR,
             'path'  => $fh
         ]);
@@ -131,9 +131,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \DomainException
-     * @expectedExceptionMessage Logger config missing name
+     * @expectedExceptionMessage Logger config missing logger type
      */
-    public function testCreateLoggerMissingLoggerName()
+    public function testCreateLoggerMissingLoggerType()
     {
         $factory = new Factory();
         $factory->createLogger('test', [ 'path' => 'filename' ]);
@@ -141,11 +141,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \DomainException
-     * @expectedExceptionMessage Cannot find a logger named
+     * @expectedExceptionMessage Cannot find a logger type named
      */
     public function testCreateLoggerInvalidLogger()
     {
         $factory = new Factory();
-        $factory->createLogger('test', [ 'name' => 'unknown', 'path' => '(filename)' ]);
+        $factory->createLogger('test', [ 'type' => 'unknown', 'path' => '(filename)' ]);
     }
 }

@@ -11,9 +11,11 @@ use Psr\Log\LogLevel;
  */
 class Factory
 {
-    const LOGGER_COLLECTION = 'collection';
-    const LOGGER_STREAM     = 'stream';
-    const LOGGER_GELF       = 'gelf';
+    const LOGGER_TYPE = 'type';
+
+    const LOGGER_TYPE_COLLECTION = 'collection';
+    const LOGGER_TYPE_STREAM     = 'stream';
+    const LOGGER_TYPE_GELF       = 'gelf';
 
     /**
      * @param string $name
@@ -23,22 +25,22 @@ class Factory
      */
     public function createLogger($name, array $config)
     {
-        if (!isset($config['name'])) {
-            throw new \DomainException('Logger config missing name');
+        if (!isset($config[self::LOGGER_TYPE])) {
+            throw new \DomainException('Logger config missing logger type');
         }
-        $type = $config['name'];
+        $type = $config[self::LOGGER_TYPE];
         switch (strtolower($type)) {
-            case self::LOGGER_COLLECTION:
+            case self::LOGGER_TYPE_COLLECTION:
                 $logger = $this->createCollectionLogger($name, $config);
                 break;
-            case self::LOGGER_STREAM:
+            case self::LOGGER_TYPE_STREAM:
                 $logger = $this->createStreamLogger($name, $config);
                 break;
-            case self::LOGGER_GELF:
+            case self::LOGGER_TYPE_GELF:
                 $logger = $this->createGelfLogger($name, $config);
                 break;
             default:
-                throw new \DomainException(sprintf('Cannot find a logger named "%s"', $type));
+                throw new \DomainException(sprintf('Cannot find a logger type named "%s"', $type));
         }
         $logLevel = isset($config['level']) ? $config['level'] : LogLevel::DEBUG;
         if ($logLevel !== LogLevel::DEBUG) {
