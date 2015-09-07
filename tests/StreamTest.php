@@ -95,4 +95,114 @@ class StreamTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($contextString, $logMessage);
     }
+
+    public function testNewDateFormat()
+    {
+        $resource = fopen('php://memory', 'a');
+        $stream = new Stream('name', $resource);
+
+        $stream->setDateFormat('d/m/Y');
+        $stream->setMessageFormat('{datetime}');
+
+        $stream->log(LogLevel::ALERT, 'Test Log Message');
+
+        rewind($resource);
+        $logMessage = fgets($resource);
+
+        $this->assertStringMatchesFormat('%d/%d/%d', $logMessage);
+    }
+
+    public function testStringResource()
+    {
+        $stream = new Stream('name', 'php://memory');
+
+        $this->assertAttributeInternalType('resource', 'stream', $stream);
+    }
+
+    public function testFormatContextBoolean()
+    {
+        $resource = fopen('php://memory', 'a');
+        $stream = new Stream('name', $resource);
+
+        $stream->setMessageFormat('{message}');
+
+        $stream->log(LogLevel::ALERT, '{myvalue}', [
+            'myvalue' => true
+        ]);
+
+        rewind($resource);
+        $logMessage = fgets($resource);
+
+        $this->assertEquals('true', $logMessage);
+    }
+
+    public function testFormatContextString()
+    {
+        $resource = fopen('php://memory', 'a');
+        $stream = new Stream('name', $resource);
+
+        $stream->setMessageFormat('{message}');
+
+        $stream->log(LogLevel::ALERT, '{myvalue}', [
+            'myvalue' => 'value'
+        ]);
+
+        rewind($resource);
+        $logMessage = fgets($resource);
+
+        $this->assertEquals('value', $logMessage);
+    }
+
+    public function testFormatContextNull()
+    {
+        $resource = fopen('php://memory', 'a');
+        $stream = new Stream('name', $resource);
+
+        $stream->setMessageFormat('{message}');
+
+        $stream->log(LogLevel::ALERT, '{myvalue}', [
+            'myvalue' => null
+        ]);
+
+        rewind($resource);
+        $logMessage = fgets($resource);
+
+        $this->assertEquals('NULL', $logMessage);
+    }
+
+    public function testFormatContextClass()
+    {
+        $resource = fopen('php://memory', 'a');
+        $stream = new Stream('name', $resource);
+
+        $stream->setMessageFormat('{message}');
+
+        $object = new \stdClass();
+
+        $stream->log(LogLevel::ALERT, '{myvalue}', [
+            'myvalue' => $object
+        ]);
+
+        rewind($resource);
+        $logMessage = fgets($resource);
+
+        $this->assertEquals('stdClass', $logMessage);
+    }
+
+    public function testFormatContextRawType()
+    {
+        $resource = fopen('php://memory', 'a');
+        $stream = new Stream('name', $resource);
+
+        $stream->setMessageFormat('{message}');
+
+        $stream->log(LogLevel::ALERT, '{myvalue}', [
+            'myvalue' => []
+        ]);
+
+        rewind($resource);
+        $logMessage = fgets($resource);
+
+        $this->assertEquals('array', $logMessage);
+    }
 }
