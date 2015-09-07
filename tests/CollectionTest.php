@@ -14,7 +14,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testLog() {
+    public function testLog()
+    {
         $logger = new Collection();
 
         // Add a logger to the collection

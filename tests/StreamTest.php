@@ -28,7 +28,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($message, $logMessage);
     }
 
-    public function testMessageFormatName() {
+    public function testMessageFormatName()
+    {
         $streamName = 'myTestStreamLogger';
         $resource = fopen('php://memory', 'a');
         $stream = new Stream($streamName, $resource);
@@ -42,7 +43,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($streamName, $logMessage);
     }
 
-    public function testMessageFormatLevel() {
+    public function testMessageFormatLevel()
+    {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
 
@@ -55,7 +57,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($level, $logMessage);
     }
 
-    public function testMessageFormatMessage() {
+    public function testMessageFormatMessage()
+    {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
 
@@ -68,7 +71,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($message, $logMessage);
     }
 
-    public function testMessageFormatContext() {
+    public function testMessageFormatContext()
+    {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
 
