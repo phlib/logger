@@ -11,10 +11,6 @@ use Psr\Log\LogLevel;
  */
 class Factory
 {
-    const LOGGER_TYPE_COLLECTION = 'collection';
-    const LOGGER_TYPE_STREAM     = 'stream';
-    const LOGGER_TYPE_GELF       = 'gelf';
-
     /**
      * @param string $name
      * @param array $config

@@ -12,7 +12,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testGetLogger()
     {
         $loggerConfig = [
-            'type'    => Factory::LOGGER_TYPE_COLLECTION,
+            'type'    => 'collection',
             'loggers' => []
         ];
 
@@ -37,7 +37,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testGetLoggerAgain()
     {
         $loggerConfig = [
-            'type' => Factory::LOGGER_TYPE_STREAM,
+            'type' => 'stream',
             'path' => '(filename)'
         ];
 
@@ -68,7 +68,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $prefix = 'logger-prefix-';
 
         $loggerConfig = [
-            'type'  => Factory::LOGGER_TYPE_GELF,
+            'type'  => 'gelf',
             'level' => LogLevel::CRITICAL,
             'host'  => '(hostname)'
         ];
@@ -95,7 +95,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testGetLoggerCollection()
     {
         $loggerConfig = [
-            'type'  => Factory::LOGGER_TYPE_STREAM,
+            'type'  => 'stream',
             'level' => LogLevel::WARNING,
             'path'  => '(filename)'
         ];

@@ -52,7 +52,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateCollectionLoggerWithConfig()
     {
         $gelfConfig = [
-            'type' => Factory::LOGGER_TYPE_GELF,
+            'type' => 'gelf',
             'host' => '127.0.0.1'
         ];
 

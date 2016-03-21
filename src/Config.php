@@ -31,7 +31,7 @@ class Config implements ConfigInterface
 
         if (!isset($loggerConfig['type'])) {
             $loggerConfig = [
-                'type'    => Factory::LOGGER_TYPE_COLLECTION,
+                'type'    => 'collection',
                 'loggers' => $loggerConfig
             ];
         }
