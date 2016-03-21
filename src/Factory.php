@@ -11,8 +11,6 @@ use Psr\Log\LogLevel;
  */
 class Factory
 {
-    const LOGGER_TYPE = 'type';
-
     const LOGGER_TYPE_COLLECTION = 'collection';
     const LOGGER_TYPE_STREAM     = 'stream';
     const LOGGER_TYPE_GELF       = 'gelf';
@@ -25,10 +23,10 @@ class Factory
      */
     public function createLogger($name, array $config)
     {
-        if (!isset($config[self::LOGGER_TYPE])) {
+        if (!isset($config['type'])) {
             throw new \DomainException('Logger config missing logger type');
         }
-        $type = $config[self::LOGGER_TYPE];
+        $type = $config['type'];
         switch (strtolower($type)) {
             case self::LOGGER_TYPE_COLLECTION:
                 $logger = $this->createCollectionLogger($name, $config);

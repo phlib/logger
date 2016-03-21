@@ -29,10 +29,10 @@ class Config implements ConfigInterface
     {
         $loggerConfig = $this->resolveAliases($name);
 
-        if (!isset($loggerConfig[Factory::LOGGER_TYPE])) {
+        if (!isset($loggerConfig['type'])) {
             $loggerConfig = [
-                Factory::LOGGER_TYPE => Factory::LOGGER_TYPE_COLLECTION,
-                'loggers'            => $loggerConfig
+                'type'    => Factory::LOGGER_TYPE_COLLECTION,
+                'loggers' => $loggerConfig
             ];
         }
 
