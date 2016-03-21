@@ -24,7 +24,7 @@ class Factory
         }
         $type = trim($config['type']);
         if (!$type) {
-            throw new \DomainException(sprintf('Logger type cannot be empty', $type));
+            throw new \DomainException('Logger type cannot be empty');
         }
         $methodName = sprintf('create%sLogger', ucfirst($type));
         if (!method_exists($this, $methodName)) {
