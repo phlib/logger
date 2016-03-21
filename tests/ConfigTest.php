@@ -15,7 +15,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config = new Config($configArray);
 
         $expected = [
-            'type'    => Factory::LOGGER_TYPE_COLLECTION,
+            'type'    => 'collection',
             'loggers' => []
         ];
 
@@ -25,7 +25,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testStream()
     {
         $streamConfig = [
-            'type' => Factory::LOGGER_TYPE_STREAM,
+            'type' => 'stream',
             'path' => '(filename)'
         ];
 
@@ -41,7 +41,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testCollectionCoerce()
     {
         $gelfConfig = [
-            'type' => Factory::LOGGER_TYPE_GELF,
+            'type' => 'gelf',
         ];
 
         $configArray = [
@@ -53,7 +53,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config = new Config($configArray);
 
         $expected = [
-            'type'    => Factory::LOGGER_TYPE_COLLECTION,
+            'type'    => 'collection',
             'loggers' => [
                 $gelfConfig
             ]
@@ -65,7 +65,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testAlias()
     {
         $streamConfig = [
-            'type'  => Factory::LOGGER_TYPE_STREAM,
+            'type'  => 'stream',
             'level' => LogLevel::CRITICAL,
             'path'  => '(filename)'
         ];
@@ -90,7 +90,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config = new Config($configArray);
 
         $expected = [
-            'type'    => Factory::LOGGER_TYPE_COLLECTION,
+            'type'    => 'collection',
             'loggers' => []
         ];
 

@@ -11,10 +11,6 @@ use Psr\Log\LogLevel;
  */
 class Factory
 {
-    const LOGGER_TYPE_COLLECTION = 'collection';
-    const LOGGER_TYPE_STREAM     = 'stream';
-    const LOGGER_TYPE_GELF       = 'gelf';
-
     /**
      * @param string $name
      * @param array $config
@@ -26,20 +22,15 @@ class Factory
         if (!isset($config['type'])) {
             throw new \DomainException('Logger config missing logger type');
         }
-        $type = $config['type'];
-        switch (strtolower($type)) {
-            case self::LOGGER_TYPE_COLLECTION:
-                $logger = $this->createCollectionLogger($name, $config);
-                break;
-            case self::LOGGER_TYPE_STREAM:
-                $logger = $this->createStreamLogger($name, $config);
-                break;
-            case self::LOGGER_TYPE_GELF:
-                $logger = $this->createGelfLogger($name, $config);
-                break;
-            default:
-                throw new \DomainException(sprintf('Cannot find a logger type named "%s"', $type));
+        $type = trim($config['type']);
+        if (!$type) {
+            throw new \DomainException('Logger type cannot be empty');
         }
+        $methodName = sprintf('create%sLogger', ucfirst($type));
+        if (!method_exists($this, $methodName)) {
+            throw new \DomainException(sprintf('Cannot find a logger type named "%s"', $type));
+        }
+        $logger   = $this->$methodName($name, $config);
         $logLevel = isset($config['level']) ? $config['level'] : LogLevel::DEBUG;
         if ($logLevel !== LogLevel::DEBUG) {
             return new LevelFilter($logger, $logLevel);
