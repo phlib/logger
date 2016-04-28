@@ -8,9 +8,10 @@
         }
     ],
     "require": {
+        "php": "^5.4",
         "psr/log": "^1.0",
         "graylog2/gelf-php": "^1.3",
-        "symfony/console": "^3"
+        "symfony/console": "^2.5.12|^3"
     },
     "autoload": {
         "psr-4": {
