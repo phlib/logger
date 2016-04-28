@@ -8,8 +8,9 @@
         }
     ],
     "require": {
+        "psr/log": "^1.0",
         "graylog2/gelf-php": "^1.3",
-        "psr/log": "^1.0"
+        "symfony/console": "^3"
     },
     "autoload": {
         "psr-4": {
