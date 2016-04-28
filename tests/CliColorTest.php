@@ -32,7 +32,7 @@ class CliColorTest extends \PHPUnit_Framework_TestCase
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[34m", $logMessage);
         $this->assertContains($message, $logMessage);
-        $this->assertStringEndsWith("\033[39m", $logMessage);
+        $this->assertStringEndsWith("\033[39m\n", $logMessage);
     }
 
     public function testLogNotice()
@@ -47,7 +47,7 @@ class CliColorTest extends \PHPUnit_Framework_TestCase
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[32m", $logMessage);
         $this->assertContains($message, $logMessage);
-        $this->assertStringEndsWith("\033[39m", $logMessage);
+        $this->assertStringEndsWith("\033[39m\n", $logMessage);
     }
 
     public function testLogWarning()
@@ -62,7 +62,7 @@ class CliColorTest extends \PHPUnit_Framework_TestCase
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[33m", $logMessage);
         $this->assertContains($message, $logMessage);
-        $this->assertStringEndsWith("\033[39m", $logMessage);
+        $this->assertStringEndsWith("\033[39m\n", $logMessage);
     }
 
     public function testLogError()
@@ -77,7 +77,7 @@ class CliColorTest extends \PHPUnit_Framework_TestCase
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[31m", $logMessage);
         $this->assertContains($message, $logMessage);
-        $this->assertStringEndsWith("\033[39m", $logMessage);
+        $this->assertStringEndsWith("\033[39m\n", $logMessage);
     }
 
     public function testLogCritical()
@@ -92,7 +92,7 @@ class CliColorTest extends \PHPUnit_Framework_TestCase
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[31;43m", $logMessage);
         $this->assertContains($message, $logMessage);
-        $this->assertStringEndsWith("\033[39;49m", $logMessage);
+        $this->assertStringEndsWith("\033[39;49m\n", $logMessage);
     }
 
     public function testLogAlert()
@@ -107,7 +107,7 @@ class CliColorTest extends \PHPUnit_Framework_TestCase
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[37;41;1m", $logMessage);
         $this->assertContains($message, $logMessage);
-        $this->assertStringEndsWith("\033[39;49;22m", $logMessage);
+        $this->assertStringEndsWith("\033[39;49;22m\n", $logMessage);
     }
 
     public function testLogEmergency()
@@ -122,6 +122,6 @@ class CliColorTest extends \PHPUnit_Framework_TestCase
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[37;41;1;4m", $logMessage);
         $this->assertContains($message, $logMessage);
-        $this->assertStringEndsWith("\033[39;49;22;24m", $logMessage);
+        $this->assertStringEndsWith("\033[39;49;22;24m\n", $logMessage);
     }
 }

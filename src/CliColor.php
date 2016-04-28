@@ -17,12 +17,12 @@ class CliColor extends Stream
     /**
      * @var string
      */
-    private $originalMessageFormat;
+    private $currentLevel;
 
     /**
      * @var OutputFormatter
      */
-    protected $formatter;
+    private $formatter;
 
     /**
      * @see Stream::__construct()
@@ -32,8 +32,6 @@ class CliColor extends Stream
     public function __construct($name, $stream = STDERR)
     {
         parent::__construct($name, $stream);
-
-        $this->originalMessageFormat = $this->messageFormat;
 
         $this->formatter = new OutputFormatter(true, [
             'debug'     => new OutputFormatterStyle(),
@@ -58,22 +56,20 @@ class CliColor extends Stream
      */
     public function log($level, $message, array $context = array())
     {
-        $format = "<{$level}>{$this->originalMessageFormat}</{$level}>";
-        $this->messageFormat = $this->formatter->format($format);
+        $this->currentLevel = $level;
 
         parent::log($level, $message, $context);
     }
 
     /**
-     * @see Stream::setMessageFormat()
-     * @param string $format
-     * @return $this
+     * @see Stream::getMessageFormat()
+     * @return string
      */
-    public function setMessageFormat($format)
+    protected function getMessageFormat()
     {
-        $this->originalMessageFormat = $format;
+        $format = parent::getMessageFormat();
+        $format = "<{$this->currentLevel}>{$format}</{$this->currentLevel}>";
 
-        return parent::setMessageFormat($format);
+        return $this->formatter->format($format);
     }
-
 }
