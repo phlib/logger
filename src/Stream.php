@@ -89,7 +89,7 @@ class Stream extends AbstractLogger
 
         $message = $this->interpolate($this->getMessageFormat(), $meta);
 
-        fwrite($this->stream, $message . "\n");
+        fwrite($this->stream, $message . PHP_EOL);
     }
 
     /**
