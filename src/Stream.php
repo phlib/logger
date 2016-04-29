@@ -14,7 +14,7 @@ class Stream extends AbstractLogger
     /**
      * @var string
      */
-    protected $messageFormat = "[{datetime}] {name}.{level}: {message} {context}\n";
+    protected $messageFormat = '[{datetime}] {name}.{level}: {message} {context}';
 
     /**
      * @var string
@@ -47,6 +47,20 @@ class Stream extends AbstractLogger
     }
 
     /**
+     * Get current message format
+     *
+     * This method can be overridden by extending classes to modify the behaviour
+     *
+     * @param mixed $level
+     * @param array $context
+     * @return string
+     */
+    protected function getMessageFormat($level, array $context = array())
+    {
+        return $this->messageFormat;
+    }
+
+    /**
      * @param string $format
      * @return $this
      */
@@ -63,7 +77,7 @@ class Stream extends AbstractLogger
      * @param mixed $level
      * @param string $message
      * @param array $context
-     * @return null
+     * @return void
      */
     public function log($level, $message, array $context = array())
     {
@@ -75,9 +89,9 @@ class Stream extends AbstractLogger
             'context'  => $this->formatContext($context)
         ];
 
-        $message = $this->interpolate($this->messageFormat, $meta);
+        $message = $this->interpolate($this->getMessageFormat($level, $context), $meta);
 
-        fwrite($this->stream, $message);
+        fwrite($this->stream, $message . PHP_EOL);
     }
 
     /**
