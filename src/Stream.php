@@ -10,16 +10,25 @@ use Psr\Log\AbstractLogger;
  */
 class Stream extends AbstractLogger
 {
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var resource
+     */
+    private $stream;
 
     /**
      * @var string
      */
-    protected $messageFormat = '[{datetime}] {name}.{level}: {message} {context}';
+    private $messageFormat = '[{datetime}] {name}.{level}: {message} {context}';
 
     /**
      * @var string
      */
-    protected $dateFormat = 'Y-m-d H:i:s';
+    private $dateFormat = 'Y-m-d H:i:s';
 
     /**
      * @param string $name

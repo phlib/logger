@@ -16,9 +16,9 @@ class LevelFilter extends AbstractLogger
     /**
      * Logging levels from syslog protocol defined in RFC 5424
      *
-     * @var array $levels Logging levels
+     * @var string[] $levels Logging levels
      */
-    protected static $levels = array(
+    private static $levels = array(
         LogLevel::EMERGENCY, // 0
         LogLevel::ALERT,     // 1
         LogLevel::CRITICAL,  // 2
@@ -28,6 +28,16 @@ class LevelFilter extends AbstractLogger
         LogLevel::INFO,      // 6
         LogLevel::DEBUG      // 7
     );
+
+    /**
+     * @var int
+     */
+    private $logLevel;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * @param LoggerInterface $logger
