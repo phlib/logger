@@ -15,11 +15,6 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 class CliColor extends Stream
 {
     /**
-     * @var string
-     */
-    private $currentLevel;
-
-    /**
      * @var OutputFormatter
      */
     private $formatter;
@@ -46,30 +41,16 @@ class CliColor extends Stream
     }
 
     /**
-     * Logs with an arbitrary level.
-     *
-     * @see Stream::log()
-     * @param mixed $level
-     * @param string $message
-     * @param array $context
-     * @return void
-     */
-    public function log($level, $message, array $context = array())
-    {
-        $this->currentLevel = $level;
-
-        parent::log($level, $message, $context);
-    }
-
-    /**
      * @see Stream::getMessageFormat()
+     * @param mixed $level
+     * @param array $context
      * @return string
      */
-    protected function getMessageFormat()
+    protected function getMessageFormat($level, array $context = array())
     {
-        $format = parent::getMessageFormat();
-        $format = "<{$this->currentLevel}>{$format}</{$this->currentLevel}>";
+        $parentFormat = parent::getMessageFormat($level, $context);
+        $consoleFormat = "<{$level}>{$parentFormat}</{$level}>";
 
-        return $this->formatter->format($format);
+        return $this->formatter->format($consoleFormat);
     }
 }

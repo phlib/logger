@@ -51,9 +51,11 @@ class Stream extends AbstractLogger
      *
      * This method can be overridden by extending classes to modify the behaviour
      *
+     * @param mixed $level
+     * @param array $context
      * @return string
      */
-    protected function getMessageFormat()
+    protected function getMessageFormat($level, array $context = array())
     {
         return $this->messageFormat;
     }
@@ -87,7 +89,7 @@ class Stream extends AbstractLogger
             'context'  => $this->formatContext($context)
         ];
 
-        $message = $this->interpolate($this->getMessageFormat(), $meta);
+        $message = $this->interpolate($this->getMessageFormat($level, $context), $meta);
 
         fwrite($this->stream, $message . PHP_EOL);
     }
