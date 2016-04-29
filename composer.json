@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "php": "^5.4",
+        "php": "^5.4|^7",
         "psr/log": "^1.0",
         "graylog2/gelf-php": "^1.3",
         "symfony/console": "^2.5.12|^3"
