@@ -18,6 +18,9 @@
             "Phlib\\Logger\\": "src"
         }
     },
+    "provide": {
+        "psr/log-implementation": "1.0"
+    },
 
     "require-dev": {
         "phpunit/phpunit": "^4.7"
