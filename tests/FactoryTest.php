@@ -126,7 +126,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             'path'  => $fh
         ]);
 
-        $this->assertInstanceOf('\Phlib\Logger\LevelFilter', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\Decorator\LevelFilter', $logger);
     }
 
     /**

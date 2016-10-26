@@ -1,7 +1,8 @@
 <?php
-namespace Phlib\Logger\Test;
 
-use Phlib\Logger\LevelFilter;
+namespace Phlib\Logger\Test\Decorator;
+
+use Phlib\Logger\Decorator\LevelFilter;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 

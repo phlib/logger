@@ -33,7 +33,7 @@ class Factory
         $logger   = $this->$methodName($name, $config);
         $logLevel = isset($config['level']) ? $config['level'] : LogLevel::DEBUG;
         if ($logLevel !== LogLevel::DEBUG) {
-            return new LevelFilter($logger, $logLevel);
+            return new Decorator\LevelFilter($logger, $logLevel);
         }
         return $logger;
     }

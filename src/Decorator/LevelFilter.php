@@ -1,6 +1,6 @@
 <?php
 
-namespace Phlib\Logger;
+namespace Phlib\Logger\Decorator;
 
 use Psr\Log\LogLevel;
 use Psr\Log\AbstractLogger;
