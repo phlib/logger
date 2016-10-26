@@ -29,22 +29,27 @@ class LevelFilter extends AbstractDecorator
     );
 
     /**
-     * @param LoggerInterface $logger
-     * @param int $config
+     * @var int
      */
-    public function __construct(LoggerInterface $logger, $config)
+    private $logLevel;
+
+    /**
+     * @param LoggerInterface $logger
+     * @param string $level \Psr\Log\LogLevel string
+     */
+    public function __construct(LoggerInterface $logger, $level)
     {
-        $config = array_search($config, self::$levels, true);
-        if ($config === false) {
+        parent::__construct($logger, $level);
+
+        $this->logLevel = array_search($level, self::$levels, true);
+        if ($this->logLevel === false) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Cannot use logging level "%s"',
-                    $config
+                    $level
                 )
             );
         }
-
-        parent::__construct($logger, $config);
     }
 
     /**
@@ -66,7 +71,7 @@ class LevelFilter extends AbstractDecorator
                 )
             );
         }
-        if ($levelCode > $this->config) {
+        if ($levelCode > $this->logLevel) {
             return;
         }
 

@@ -16,18 +16,19 @@ abstract class AbstractDecorator extends AbstractLogger
     private $logger;
 
     /**
-     * @var mixed
-     */
-    protected $config;
-
-    /**
+     * AbstractDecorator constructor
+     *
+     * Stores the Logger for re-use in the concrete via getInnerLogger()
+     *
+     * If the concrete requires use of the config value, override the constructor
+     * to add validation and store for re-use
+     *
      * @param LoggerInterface $logger
      * @param mixed $config
      */
     public function __construct(LoggerInterface $logger, $config)
     {
         $this->logger = $logger;
-        $this->config = $config;
     }
 
     /**
