@@ -3,7 +3,6 @@
 namespace Phlib\Logger\Decorator;
 
 use Psr\Log\LogLevel;
-use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
@@ -11,7 +10,7 @@ use Psr\Log\LoggerInterface;
  * Class LevelFilter
  * @package Phlib\Logger
  */
-class LevelFilter extends AbstractLogger
+class LevelFilter extends AbstractDecorator
 {
     /**
      * Logging levels from syslog protocol defined in RFC 5424
@@ -30,32 +29,22 @@ class LevelFilter extends AbstractLogger
     );
 
     /**
-     * @var int
-     */
-    private $logLevel;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @param LoggerInterface $logger
-     * @param $level
+     * @param int $config
      */
-    public function __construct(LoggerInterface $logger, $level)
+    public function __construct(LoggerInterface $logger, $config)
     {
-        $this->logger = $logger;
-
-        $this->logLevel = array_search($level, self::$levels, true);
-        if ($this->logLevel === false) {
+        $config = array_search($config, self::$levels, true);
+        if ($config === false) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Cannot use logging level "%s"',
-                    $level
+                    $config
                 )
             );
         }
+
+        parent::__construct($logger, $config);
     }
 
     /**
@@ -77,10 +66,10 @@ class LevelFilter extends AbstractLogger
                 )
             );
         }
-        if ($levelCode > $this->logLevel) {
+        if ($levelCode > $this->config) {
             return;
         }
 
-        $this->logger->log($level, $message, $context);
+        $this->getInnerLogger()->log($level, $message, $context);
     }
 }
