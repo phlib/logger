@@ -3,7 +3,6 @@
 namespace Phlib\Logger;
 
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 
 /**
  * Class Factory
@@ -11,6 +10,9 @@ use Psr\Log\LogLevel;
  */
 class Factory
 {
+    /**
+     * @var array
+     */
     private $decorators = [
         'level' => '\Phlib\Logger\Decorator\LevelFilter'
     ];
