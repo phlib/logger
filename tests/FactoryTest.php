@@ -115,18 +115,114 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
     }
 
-    public function testCreateLoggerStreamFiltered()
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage key already in use
+     */
+    public function testDecoratorLevelIsRegisteredKey()
+    {
+        $configKey = 'level';
+
+        $factory = new Factory();
+        $factory->registerDecorator($configKey, 'dummy');
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage class already registered
+     */
+    public function testDecoratorLevelIsRegisteredClass()
+    {
+        $className = '\Phlib\Logger\Decorator\LevelFilter';
+
+        $factory = new Factory();
+        $factory->registerDecorator('dummy', $className);
+    }
+
+    public function testUnregisterDecorator()
+    {
+        $configKey = 'level';
+
+        $factory = new Factory();
+        $factory->unregisterDecorator($configKey);
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage key not registered
+     */
+    public function testUnregisterDecoratorNotSet()
+    {
+        $configKey = 'dummy';
+
+        $factory = new Factory();
+        $factory->unregisterDecorator($configKey);
+    }
+
+    public function testCreateLoggerDecoratorNotRegistered()
     {
         $fh = fopen('php://memory', 'a');
 
         $factory = new Factory();
+        $factory->unregisterDecorator('level');
         $logger  = $factory->createLogger('test', [
             'type'   => 'stream',
             'level' => LogLevel::ERROR,
             'path'  => $fh
         ]);
 
+        $this->assertNotInstanceOf('\Phlib\Logger\Decorator\LevelFilter', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\Stream', $logger);
+    }
+
+    public function testCreateLoggerDecorator()
+    {
+        $fh = fopen('php://memory', 'a');
+
+        $factory = new Factory();
+        $factory->unregisterDecorator('level');
+        $factory->registerDecorator('dummy', '\Phlib\Logger\Decorator\LevelFilter');
+        $logger  = $factory->createLogger('test', [
+            'type'   => 'stream',
+            'dummy' => LogLevel::ERROR,
+            'path'  => $fh
+        ]);
+
         $this->assertInstanceOf('\Phlib\Logger\Decorator\LevelFilter', $logger);
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage class not found
+     */
+    public function testRegisterDecoratorMissing()
+    {
+        $fh = fopen('php://memory', 'a');
+
+        $factory = new Factory();
+        $factory->registerDecorator('dummy', '\Phlib\Logger\not\a\class');
+        $factory->createLogger('test', [
+            'type'  => 'stream',
+            'dummy' => true,
+            'path'  => $fh
+        ]);
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage class invalid
+     */
+    public function testRegisterDecoratorInvalid()
+    {
+        $fh = fopen('php://memory', 'a');
+
+        $factory = new Factory();
+        $factory->registerDecorator('dummy', '\Phlib\Logger\Config');
+        $logger  = $factory->createLogger('test', [
+            'type'  => 'stream',
+            'dummy' => true,
+            'path'  => $fh
+        ]);
     }
 
     /**
