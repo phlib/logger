@@ -68,6 +68,21 @@ class Factory
         }
         $logger = $this->$methodName($name, $config);
 
+        $logger = $this->applyDecorators($logger, $config);
+
+        return $logger;
+    }
+
+    /**
+     * Apply any available decorators to the logger, if configured
+     *
+     * @param LoggerInterface $logger
+     * @param array $config
+     *
+     * @return LoggerInterface
+     */
+    private function applyDecorators(LoggerInterface $logger, array $config)
+    {
         foreach ($this->decorators as $configKey => $decoratorClassName) {
             if (!isset($config[$configKey])) {
                 continue;
