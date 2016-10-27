@@ -67,9 +67,9 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $prefix = 'logger-prefix-';
 
         $loggerConfig = [
-            'type'  => 'gelf',
+            'type'  => 'stream',
             'level' => LogLevel::CRITICAL,
-            'host'  => '(hostname)'
+            'path'  => '(filename)'
         ];
 
         $config  = $this->getMock('\Phlib\Logger\Config', [], [[]]);
