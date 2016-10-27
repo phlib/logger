@@ -13,7 +13,10 @@ class DefaultContextTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Psr\Log\LoggerInterface', $decorator);
     }
 
-    public function testAddDecorations()
+    /**
+     * @dataProvider providerAddDefaultContext
+     */
+    public function testAddDefaultContext($defaultContext, $logContext, $expected)
     {
         $loggerInterface = $this->getMockLogger();
 
@@ -22,67 +25,58 @@ class DefaultContextTest extends \PHPUnit_Framework_TestCase
             ->with(
                 $this->anything(),
                 $this->anything(),
+                $expected
+            );
+
+        $decorator = new DefaultContext($loggerInterface, $defaultContext);
+        $decorator->info('message', $logContext);
+    }
+
+    public function providerAddDefaultContext()
+    {
+        return [
+            // Defaults, no log context
+            [
+                [
+                    'hello' => 'world',
+                    'foo' => 'bar'
+                ],
+                [],
                 [
                     'hello' => 'world',
                     'foo' => 'bar'
                 ]
-            );
-
-        $decorator = new DefaultContext($loggerInterface, [
-            'hello' => 'world',
-            'foo' => 'bar'
-        ]);
-        $decorator->info('message', []);
-    }
-
-    public function testAddContext()
-    {
-        $loggerInterface = $this->getMockLogger();
-
-        $loggerInterface->expects($this->once())
-            ->method('log')
-            ->with(
-                $this->anything(),
-                $this->anything(),
+            ],
+            // Defaults, add other log context
+            [
+                [
+                    'hello' => 'world'
+                ],
+                [
+                    'foo' => 'bar'
+                ],
                 [
                     'hello' => 'world',
                     'foo' => 'bar'
                 ]
-            );
-
-        $decorator = new DefaultContext($loggerInterface, [
-            'hello' => 'world'
-        ]);
-        $decorator->info('message', [
-            'foo' => 'bar'
-        ]);
-    }
-
-    public function testOverrideDecorations()
-    {
-        $loggerInterface = $this->getMockLogger();
-
-        $loggerInterface->expects($this->once())
-            ->method('log')
-            ->with(
-                $this->anything(),
-                $this->anything(),
+            ],
+            // Overwrite defaults with log context
+            [
+                [
+                    'hello' => 'world',
+                    'foo' => 'bar'
+                ],
                 [
                     'hello' => 'new world',
-                    'foo' => 'bob',
+                    'test' => 'abc123'
+                ],
+                [
+                    'hello' => 'new world',
+                    'foo' => 'bar',
                     'test' => 'abc123'
                 ]
-            );
-
-        $decorator = new DefaultContext($loggerInterface, [
-            'hello' => 'world',
-            'foo' => 'bar'
-        ]);
-        $decorator->info('message', [
-            'hello' => 'new world',
-            'foo' => 'bob',
-            'test' => 'abc123'
-        ]);
+            ]
+        ];
     }
 
     /**
