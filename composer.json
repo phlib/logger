@@ -5,6 +5,10 @@
         {
             "name": "Adam Whale",
             "email": "adam.whale@emailcenteruk.com"
+        },
+        {
+            "name": "Martin Price",
+            "email": "martin.price@emailcenteruk.com"
         }
     ],
     "require": {
