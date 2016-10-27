@@ -1,7 +1,7 @@
 <?php
-namespace Phlib\Logger\Test;
+namespace Phlib\Logger\Test\LoggerType;
 
-use Phlib\Logger\Collection;
+use Phlib\Logger\LoggerType\Collection;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 

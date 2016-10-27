@@ -2,7 +2,6 @@
 
 namespace Phlib\Logger\Test;
 
-use Phlib\Logger\Factory;
 use Phlib\Logger\Pool;
 use Psr\Log\LogLevel;
 
@@ -23,7 +22,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($loggerConfig));
 
         $factory = $this->getMock('\Phlib\Logger\Factory');
-        $logger  = $this->getMock('\Phlib\Logger\Collection');
+        $logger  = $this->getMock('\Phlib\Logger\LoggerType\Collection');
         $factory->expects($this->once())
             ->method('createLogger')
             ->with($this->equalTo('test'), $this->equalTo($loggerConfig))
@@ -48,7 +47,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($loggerConfig));
 
         $factory = $this->getMock('\Phlib\Logger\Factory');
-        $logger  = $this->getMockBuilder('\Phlib\Logger\Stream')->disableOriginalConstructor()->getMock();
+        $logger  = $this->getMockBuilder('\Phlib\Logger\LoggerType\Stream')->disableOriginalConstructor()->getMock();
         $factory->expects($this->once())
             ->method('createLogger')
             ->with($this->equalTo('test'), $this->equalTo($loggerConfig))
@@ -80,7 +79,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($loggerConfig));
 
         $factory = $this->getMock('\Phlib\Logger\Factory');
-        $logger  = $this->getMock('\Phlib\Logger\Gelf');
+        $logger  = $this->getMockBuilder('\Phlib\Logger\LoggerType\Stream')->disableOriginalConstructor()->getMock();
         $factory->expects($this->once())
             ->method('createLogger')
             ->with($this->equalTo($prefix . 'test'))
@@ -107,8 +106,8 @@ class PoolTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($loggerConfig));
 
         $factory          = $this->getMock('\Phlib\Logger\Factory');
-        $streamLogger     = $this->getMockBuilder('\Phlib\Logger\Stream')->disableOriginalConstructor()->getMock();
-        $collectionLogger = $this->getMock('\Phlib\Logger\Collection');
+        $streamLogger     = $this->getMockBuilder('\Phlib\Logger\LoggerType\Stream')->disableOriginalConstructor()->getMock();
+        $collectionLogger = $this->getMock('\Phlib\Logger\LoggerType\Collection');
         $factory->expects($this->once())
             ->method('createLogger')
             ->with(

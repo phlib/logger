@@ -106,12 +106,12 @@ class Factory
     /**
      * @param string $name
      * @param array $config
-     * @return Collection
+     * @return LoggerType\Collection
      * @throws \DomainException
      */
     public function createCollectionLogger($name, $config)
     {
-        $loggerCollection = new Collection();
+        $loggerCollection = new LoggerType\Collection();
         foreach ($config['loggers'] as $index => $logger) {
             if (!$logger instanceof LoggerInterface) {
                 try {
@@ -129,12 +129,12 @@ class Factory
     /**
      * @param string $name
      * @param array $config
-     * @return Stream
+     * @return LoggerType\Stream
      */
     public function createStreamLogger($name, $config)
     {
         $path = isset($config['path']) ? $config['path'] : false;
-        return new Stream($name, $path);
+        return new LoggerType\Stream($name, $path);
     }
 
     /**

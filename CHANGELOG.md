@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   Use directly or add to config, eg. `'defaultContext' => ['foo'=>'bar']`
 
 ### Changed
+- Renamed `Collection` to `LoggerType\Collection`
+- Renamed `Stream` to `LoggerType\Stream`
+- Renamed `CliColor` to `LoggerType\CliColor`
 - Renamed `LevelFilter` to `Decorator\LevelFilter`
 
 ## [2.1.1] - 2016-10-27
