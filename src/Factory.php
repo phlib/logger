@@ -14,6 +14,7 @@ class Factory
      * @var array
      */
     private $decorators = [
+        'defaultContext' => '\Phlib\Logger\Decorator\DefaultContext',
         'level' => '\Phlib\Logger\Decorator\LevelFilter'
     ];
 
