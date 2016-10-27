@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [2.1.1] - 2016-10-27
 ### Added
 - Mark package as providing an implementation of `\Psr\Log` by using Composer `provide` option
 
