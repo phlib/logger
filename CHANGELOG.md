@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Custom logger decorators can be registered on the Factory and applied via config
+
+### Changed
+- Renamed `LevelFilter` to `Decorator\LevelFilter`
 
 ## [2.1.1] - 2016-10-27
 ### Added

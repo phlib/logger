@@ -3,7 +3,6 @@
 namespace Phlib\Logger;
 
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 
 /**
  * Class Factory
@@ -11,6 +10,45 @@ use Psr\Log\LogLevel;
  */
 class Factory
 {
+    /**
+     * @var array
+     */
+    private $decorators = [
+        'level' => '\Phlib\Logger\Decorator\LevelFilter'
+    ];
+
+    /**
+     * Register a new decorator class
+     *
+     * Class must implement DecoratorInterface
+     *
+     * @param string $configKey
+     * @param string $className
+     */
+    public function registerDecorator($configKey, $className)
+    {
+        if (isset($this->decorators[$configKey])) {
+            throw new \RuntimeException('Decorator key already in use: ' . $configKey);
+        }
+        if (in_array($className, $this->decorators)) {
+            throw new \RuntimeException('Decorator class already registered: ' . $className);
+        }
+        $this->decorators[$configKey] = $className;
+    }
+
+    /**
+     * Un-register a decorator class
+     *
+     * @param string $configKey
+     */
+    public function unregisterDecorator($configKey)
+    {
+        if (!isset($this->decorators[$configKey])) {
+            throw new \RuntimeException('Decorator key not registered: ' . $configKey);
+        }
+        unset($this->decorators[$configKey]);
+    }
+
     /**
      * @param string $name
      * @param array $config
@@ -30,11 +68,37 @@ class Factory
         if (!method_exists($this, $methodName)) {
             throw new \DomainException(sprintf('Cannot find a logger type named "%s"', $type));
         }
-        $logger   = $this->$methodName($name, $config);
-        $logLevel = isset($config['level']) ? $config['level'] : LogLevel::DEBUG;
-        if ($logLevel !== LogLevel::DEBUG) {
-            return new LevelFilter($logger, $logLevel);
+        $logger = $this->$methodName($name, $config);
+
+        $logger = $this->applyDecorators($logger, $config);
+
+        return $logger;
+    }
+
+    /**
+     * Apply any available decorators to the logger, if configured
+     *
+     * @param LoggerInterface $logger
+     * @param array $config
+     *
+     * @return LoggerInterface
+     */
+    private function applyDecorators(LoggerInterface $logger, array $config)
+    {
+        foreach ($this->decorators as $configKey => $decoratorClassName) {
+            if (!isset($config[$configKey])) {
+                continue;
+            }
+            if (!class_exists($decoratorClassName)) {
+                throw new \RuntimeException('Decorator class not found: ' . $decoratorClassName);
+            }
+            if (!is_subclass_of($decoratorClassName, '\Phlib\Logger\Decorator\AbstractDecorator')) {
+                throw new \RuntimeException('Decorator class invalid: ' . $decoratorClassName);
+            }
+            /** @var \Phlib\Logger\Decorator\AbstractDecorator $logger */
+            $logger = new $decoratorClassName($logger, $config[$configKey]);
         }
+
         return $logger;
     }
 

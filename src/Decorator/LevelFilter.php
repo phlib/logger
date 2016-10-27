@@ -1,9 +1,8 @@
 <?php
 
-namespace Phlib\Logger;
+namespace Phlib\Logger\Decorator;
 
 use Psr\Log\LogLevel;
-use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
@@ -11,7 +10,7 @@ use Psr\Log\LoggerInterface;
  * Class LevelFilter
  * @package Phlib\Logger
  */
-class LevelFilter extends AbstractLogger
+class LevelFilter extends AbstractDecorator
 {
     /**
      * Logging levels from syslog protocol defined in RFC 5424
@@ -35,17 +34,12 @@ class LevelFilter extends AbstractLogger
     private $logLevel;
 
     /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @param LoggerInterface $logger
-     * @param $level
+     * @param string $level \Psr\Log\LogLevel string
      */
     public function __construct(LoggerInterface $logger, $level)
     {
-        $this->logger = $logger;
+        parent::__construct($logger, $level);
 
         $this->logLevel = array_search($level, self::$levels, true);
         if ($this->logLevel === false) {
@@ -81,6 +75,6 @@ class LevelFilter extends AbstractLogger
             return;
         }
 
-        $this->logger->log($level, $message, $context);
+        $this->getInnerLogger()->log($level, $message, $context);
     }
 }
