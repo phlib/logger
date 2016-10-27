@@ -1,6 +1,6 @@
 <?php
 
-namespace Phlib\Logger;
+namespace Phlib\Logger\LoggerType;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;

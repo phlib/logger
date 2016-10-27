@@ -2,6 +2,7 @@
 
 namespace Phlib\Logger;
 
+use Phlib\Logger\LoggerType\Collection;
 use Psr\Log\LoggerInterface;
 
 /**

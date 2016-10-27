@@ -1,7 +1,7 @@
 <?php
-namespace Phlib\Logger\Test;
+namespace Phlib\Logger\Test\LoggerType;
 
-use Phlib\Logger\CliColor;
+use Phlib\Logger\LoggerType\CliColor;
 use Psr\Log\LogLevel;
 
 class CliColorTest extends \PHPUnit_Framework_TestCase

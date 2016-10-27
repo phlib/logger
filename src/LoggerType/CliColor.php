@@ -1,6 +1,6 @@
 <?php
 
-namespace Phlib\Logger;
+namespace Phlib\Logger\LoggerType;
 
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;

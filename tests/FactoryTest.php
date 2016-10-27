@@ -15,7 +15,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $fh = fopen('php://memory', 'a');
         $logger = $factory->createStreamLogger('test', [ 'path' => $fh ]);
 
-        $this->assertInstanceOf('\Phlib\Logger\Stream', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\LoggerType\Stream', $logger);
     }
 
     public function testCreateGelfLogger()
@@ -34,7 +34,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             'loggers' => []
         ]);
 
-        $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\LoggerType\Collection', $logger);
     }
 
     public function testCreateCollectionLoggerExistingLogger()
@@ -46,7 +46,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             'loggers' => [$existingLogger]
         ]);
 
-        $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\LoggerType\Collection', $logger);
     }
 
     public function testCreateCollectionLoggerWithConfig()
@@ -61,7 +61,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             'loggers' => [$gelfConfig]
         ]);
 
-        $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\LoggerType\Collection', $logger);
     }
 
     /**
@@ -90,7 +90,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             'path' => $fh
         ]);
 
-        $this->assertInstanceOf('\Phlib\Logger\Stream', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\LoggerType\Stream', $logger);
     }
 
     public function testCreateLoggerGelfUnfiltered()
@@ -112,7 +112,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             'loggers' => []
         ]);
 
-        $this->assertInstanceOf('\Phlib\Logger\Collection', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\LoggerType\Collection', $logger);
     }
 
     /**
@@ -172,7 +172,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertNotInstanceOf('\Phlib\Logger\Decorator\LevelFilter', $logger);
-        $this->assertInstanceOf('\Phlib\Logger\Stream', $logger);
+        $this->assertInstanceOf('\Phlib\Logger\LoggerType\Stream', $logger);
     }
 
     public function testCreateLoggerDecorator()
