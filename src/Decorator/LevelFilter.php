@@ -55,10 +55,11 @@ class LevelFilter extends AbstractDecorator
     /**
      * Logs with an arbitrary level.
      *
-     * @param mixed $level
+     * @param mixed  $level
      * @param string $message
-     * @param array $context
-     * @return null
+     * @param array  $context
+     *
+     * @return void
      */
     public function log($level, $message, array $context = array())
     {
