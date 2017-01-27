@@ -1,6 +1,7 @@
 {
     "name": "phlib/logger",
     "description": "Additional Logging Classes",
+    "license": "LGPL-3.0",
     "authors": [
         {
             "name": "Adam Whale",
