@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [3.0.1] - 2018-02-13
 ### Added
 - Apply GNU LGPLv3 software licence
 - Add support for Symfony\Console v4
