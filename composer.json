@@ -4,12 +4,14 @@
     "license": "LGPL-3.0",
     "authors": [
         {
-            "name": "Adam Whale",
-            "email": "adam.whale@emailcenteruk.com"
+            "name": "Adam Whale"
         },
         {
-            "name": "Martin Price",
-            "email": "martin.price@emailcenteruk.com"
+            "name": "Martin Price"
+        },
+        {
+            "name": "Phlib Team & Contributors",
+            "homepage": "https://github.com/phlib/logger/contributors"
         }
     ],
     "require": {
