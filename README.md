@@ -1,10 +1,10 @@
 # phlib/logger
 
-[![Build Status](https://img.shields.io/travis/phlib/logger/master.svg?style=flat-square)](https://travis-ci.org/phlib/logger)
+[![Build Status](https://img.shields.io/travis/com/phlib/logger/main.svg)](https://travis-ci.com/phlib/logger)
 [![Codecov](https://img.shields.io/codecov/c/github/phlib/logger.svg)](https://codecov.io/gh/phlib/logger)
-[![Latest Stable Version](https://img.shields.io/packagist/v/phlib/logger.svg?style=flat-square)](https://packagist.org/packages/phlib/logger)
-[![Total Downloads](https://img.shields.io/packagist/dt/phlib/logger.svg?style=flat-square)](https://packagist.org/packages/phlib/logger)
-![Licence](https://img.shields.io/github/license/phlib/logger.svg?style=flat-square)
+[![Latest Stable Version](https://img.shields.io/packagist/v/phlib/logger.svg)](https://packagist.org/packages/phlib/logger)
+[![Total Downloads](https://img.shields.io/packagist/dt/phlib/logger.svg)](https://packagist.org/packages/phlib/logger)
+![Licence](https://img.shields.io/github/license/phlib/logger.svg)
 
 PHP PSR-3-compatible logger
 
