@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+- **BC break**: Removed support for PHP versions <= 7.2 as they are no longer
+  [actively supported](https://php.net/supported-versions.php)
+  by the PHP project.
+
 ## [3.0.2] - 2019-12-10
 ### Added
 - Add support for Symfony\Console v5

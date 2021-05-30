@@ -1,25 +1,18 @@
 language: php
 
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
   - 7.3
-  - 7.4snapshot
+  - 7.4
 
-jobs:
-  allow_failures:
-    - php: 5.4
-    - php: 5.5
-    - php: 7.4snapshot
+env:
+  global:
+    - XDEBUG_MODE=coverage # Required for Xdebug v3
 
-before_script: composer install
+before_script:
+  - composer install
 
 script:
-    - ./vendor/bin/phpunit --coverage-clover=coverage.xml
+  - ./vendor/bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
