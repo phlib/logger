@@ -13,7 +13,7 @@ class StreamTest extends TestCase
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
 
-        $this->assertInstanceOf('\Psr\Log\LoggerInterface', $stream);
+        $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $stream);
     }
 
     public function testLog()
@@ -187,7 +187,7 @@ class StreamTest extends TestCase
         rewind($resource);
         $logMessage = fgets($resource);
 
-        $this->assertEquals('stdClass' . PHP_EOL, $logMessage);
+        $this->assertEquals(\stdClass::class . PHP_EOL, $logMessage);
     }
 
     public function testFormatContextRawType()

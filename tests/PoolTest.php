@@ -16,14 +16,14 @@ class PoolTest extends TestCase
             'loggers' => []
         ];
 
-        $config  = $this->createMock('\Phlib\Logger\Config');
+        $config  = $this->createMock(\Phlib\Logger\Config::class);
         $config->expects($this->once())
             ->method('getLoggerConfig')
             ->with($this->equalTo('test'))
             ->will($this->returnValue($loggerConfig));
 
-        $factory = $this->createMock('\Phlib\Logger\Factory');
-        $logger  = $this->createMock('\Phlib\Logger\LoggerType\Collection');
+        $factory = $this->createMock(\Phlib\Logger\Factory::class);
+        $logger  = $this->createMock(\Phlib\Logger\LoggerType\Collection::class);
         $factory->expects($this->once())
             ->method('createLogger')
             ->with($this->equalTo('test'), $this->equalTo($loggerConfig))
@@ -41,14 +41,14 @@ class PoolTest extends TestCase
             'path' => '(filename)'
         ];
 
-        $config  = $this->createMock('\Phlib\Logger\Config');
+        $config  = $this->createMock(\Phlib\Logger\Config::class);
         $config->expects($this->once())
             ->method('getLoggerConfig')
             ->with($this->equalTo('test'))
             ->will($this->returnValue($loggerConfig));
 
-        $factory = $this->createMock('\Phlib\Logger\Factory');
-        $logger  = $this->createMock('\Phlib\Logger\LoggerType\Stream');
+        $factory = $this->createMock(\Phlib\Logger\Factory::class);
+        $logger  = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
         $factory->expects($this->once())
             ->method('createLogger')
             ->with($this->equalTo('test'), $this->equalTo($loggerConfig))
@@ -73,14 +73,14 @@ class PoolTest extends TestCase
             'path'  => '(filename)'
         ];
 
-        $config  = $this->createMock('\Phlib\Logger\Config');
+        $config  = $this->createMock(\Phlib\Logger\Config::class);
         $config->expects($this->once())
             ->method('getLoggerConfig')
             ->with($this->equalTo('test'))
             ->will($this->returnValue($loggerConfig));
 
-        $factory = $this->createMock('\Phlib\Logger\Factory');
-        $logger  = $this->createMock('\Phlib\Logger\LoggerType\Stream');
+        $factory = $this->createMock(\Phlib\Logger\Factory::class);
+        $logger  = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
         $factory->expects($this->once())
             ->method('createLogger')
             ->with($this->equalTo($prefix . 'test'))
@@ -100,15 +100,15 @@ class PoolTest extends TestCase
             'path'  => '(filename)'
         ];
 
-        $config  = $this->createMock('\Phlib\Logger\Config');
+        $config  = $this->createMock(\Phlib\Logger\Config::class);
         $config->expects($this->once())
             ->method('getLoggerConfig')
             ->with($this->equalTo('test'))
             ->will($this->returnValue($loggerConfig));
 
-        $factory          = $this->createMock('\Phlib\Logger\Factory');
-        $streamLogger     = $this->createMock('\Phlib\Logger\LoggerType\Stream');
-        $collectionLogger = $this->createMock('\Phlib\Logger\LoggerType\Collection');
+        $factory          = $this->createMock(\Phlib\Logger\Factory::class);
+        $streamLogger     = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
+        $collectionLogger = $this->createMock(\Phlib\Logger\LoggerType\Collection::class);
         $factory->expects($this->once())
             ->method('createLogger')
             ->with(

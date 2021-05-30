@@ -11,7 +11,7 @@ class CollectionTest extends TestCase
     public function testIsPsrLog()
     {
         $logger = new Collection();
-        $this->assertInstanceOf('\Psr\Log\LoggerInterface', $logger);
+        $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $logger);
     }
 
 
@@ -47,7 +47,7 @@ class CollectionTest extends TestCase
      */
     protected function getMockLoggerInterface()
     {
-        $loggerInterface = $this->createMock('\Psr\Log\LoggerInterface');
+        $loggerInterface = $this->createMock(\Psr\Log\LoggerInterface::class);
         return $loggerInterface;
     }
 }

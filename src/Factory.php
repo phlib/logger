@@ -14,8 +14,8 @@ class Factory
      * @var array
      */
     private $decorators = [
-        'defaultContext' => '\Phlib\Logger\Decorator\DefaultContext',
-        'level' => '\Phlib\Logger\Decorator\LevelFilter'
+        'defaultContext' => \Phlib\Logger\Decorator\DefaultContext::class,
+        'level' => \Phlib\Logger\Decorator\LevelFilter::class
     ];
 
     /**
@@ -93,7 +93,7 @@ class Factory
             if (!class_exists($decoratorClassName)) {
                 throw new \RuntimeException('Decorator class not found: ' . $decoratorClassName);
             }
-            if (!is_subclass_of($decoratorClassName, '\Phlib\Logger\Decorator\AbstractDecorator')) {
+            if (!is_subclass_of($decoratorClassName, \Phlib\Logger\Decorator\AbstractDecorator::class)) {
                 throw new \RuntimeException('Decorator class invalid: ' . $decoratorClassName);
             }
             /** @var \Phlib\Logger\Decorator\AbstractDecorator $logger */
