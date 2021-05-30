@@ -2,9 +2,10 @@
 namespace Phlib\Logger\Test\LoggerType;
 
 use Phlib\Logger\LoggerType\Stream;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 
-class StreamTest extends \PHPUnit_Framework_TestCase
+class StreamTest extends TestCase
 {
 
     public function testIsPsrLog()

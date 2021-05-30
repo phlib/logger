@@ -4,9 +4,10 @@ namespace Phlib\Logger\Test;
 
 use Phlib\Logger\Config;
 use Phlib\Logger\Factory;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
 
     public function testEmptyConfig()

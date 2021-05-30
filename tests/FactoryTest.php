@@ -3,9 +3,10 @@
 namespace Phlib\Logger\Test;
 
 use Phlib\Logger\Factory;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
 
     public function testCreateStreamLogger()
@@ -39,7 +40,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateCollectionLoggerExistingLogger()
     {
-        $existingLogger = $this->getMock('\Psr\Log\LoggerInterface');
+        $existingLogger = $this->createMock('\Psr\Log\LoggerInterface');
 
         $factory = new Factory();
         $logger  = $factory->createCollectionLogger('test', [
@@ -64,12 +65,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Phlib\Logger\LoggerType\Collection', $logger);
     }
 
-    /**
-     * @expectedException \DomainException
-     * @expectedExceptionMessageRegExp /at index 0$/
-     */
     public function testCreateCollectionLoggerWithInvalidConfig()
     {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessageRegExp('/at index 0$/');
+
         $invalidConfig = [
             'type' => '(invalid)',
         ];
@@ -115,24 +115,22 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Phlib\Logger\LoggerType\Collection', $logger);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage key already in use
-     */
     public function testDecoratorLevelIsRegisteredKey()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('key already in use');
+
         $configKey = 'level';
 
         $factory = new Factory();
         $factory->registerDecorator($configKey, 'dummy');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage class already registered
-     */
     public function testDecoratorLevelIsRegisteredClass()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('class already registered');
+
         $className = '\Phlib\Logger\Decorator\LevelFilter';
 
         $factory = new Factory();
@@ -147,12 +145,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $factory->unregisterDecorator($configKey);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage key not registered
-     */
     public function testUnregisterDecoratorNotSet()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('key not registered');
+
         $configKey = 'dummy';
 
         $factory = new Factory();
@@ -191,12 +188,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Phlib\Logger\Decorator\LevelFilter', $logger);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage class not found
-     */
     public function testRegisterDecoratorMissing()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('class not found');
+
         $fh = fopen('php://memory', 'a');
 
         $factory = new Factory();
@@ -208,12 +204,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage class invalid
-     */
     public function testRegisterDecoratorInvalid()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('class invalid');
+
         $fh = fopen('php://memory', 'a');
 
         $factory = new Factory();
@@ -225,22 +220,20 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * @expectedException \DomainException
-     * @expectedExceptionMessage Logger config missing logger type
-     */
     public function testCreateLoggerMissingLoggerType()
     {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('Logger config missing logger type');
+
         $factory = new Factory();
         $factory->createLogger('test', [ 'path' => 'filename' ]);
     }
 
-    /**
-     * @expectedException \DomainException
-     * @expectedExceptionMessage Cannot find a logger type named
-     */
     public function testCreateLoggerInvalidLogger()
     {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('Cannot find a logger type named');
+
         $factory = new Factory();
         $factory->createLogger('test', [ 'type' => 'unknown', 'path' => '(filename)' ]);
     }

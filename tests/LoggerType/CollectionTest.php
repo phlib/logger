@@ -2,10 +2,11 @@
 namespace Phlib\Logger\Test\LoggerType;
 
 use Phlib\Logger\LoggerType\Collection;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     public function testIsPsrLog()
     {
@@ -46,7 +47,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getMockLoggerInterface()
     {
-        $loggerInterface = $this->getMock('\Psr\Log\LoggerInterface');
+        $loggerInterface = $this->createMock('\Psr\Log\LoggerInterface');
         return $loggerInterface;
     }
 }

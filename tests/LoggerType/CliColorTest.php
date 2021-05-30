@@ -2,9 +2,10 @@
 namespace Phlib\Logger\Test\LoggerType;
 
 use Phlib\Logger\LoggerType\CliColor;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 
-class CliColorTest extends \PHPUnit_Framework_TestCase
+class CliColorTest extends TestCase
 {
     public function testLogDebug()
     {

@@ -3,10 +3,11 @@
 namespace Phlib\Logger\Test\Decorator;
 
 use Phlib\Logger\Decorator\LevelFilter;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
-class LevelFilterTest extends \PHPUnit_Framework_TestCase
+class LevelFilterTest extends TestCase
 {
     public function testIsPsrLog()
     {
@@ -42,16 +43,17 @@ class LevelFilterTest extends \PHPUnit_Framework_TestCase
     public function testInvalidConstructorLogLevel()
     {
         // We expect an exception to be thrown when specifying an invalid logging level in the constructor
-        $this->setExpectedException('\Psr\Log\InvalidArgumentException');
+        $this->expectException('\Psr\Log\InvalidArgumentException');
+
         $levelFilter = new LevelFilter($this->getMockLoggerInterface(), 'InvalidLogLevel');
     }
 
     public function testInvalidLogLogLevel()
     {
         // We expect an exception to be thrown when specifying an invalid logging level in the log method parameter
-        $levelFilter = new LevelFilter($this->getMockLoggerInterface(), LogLevel::DEBUG);
+        $this->expectException('\Psr\Log\InvalidArgumentException');
 
-        $this->setExpectedException('\Psr\Log\InvalidArgumentException');
+        $levelFilter = new LevelFilter($this->getMockLoggerInterface(), LogLevel::DEBUG);
         $levelFilter->log('InvalidLogLevel', 'TEST LOG MESSAGE');
     }
 
@@ -60,7 +62,7 @@ class LevelFilterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getMockLoggerInterface()
     {
-        $loggerInterface = $this->getMock('\Psr\Log\LoggerInterface');
+        $loggerInterface = $this->createMock('\Psr\Log\LoggerInterface');
         return $loggerInterface;
     }
 }

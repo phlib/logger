@@ -3,9 +3,11 @@
 namespace Phlib\Logger\Test\Decorator;
 
 use Phlib\Logger\Decorator\DefaultContext;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
-class DefaultContextTest extends \PHPUnit_Framework_TestCase
+class DefaultContextTest extends TestCase
 {
     public function testIsPsrLog()
     {
@@ -80,11 +82,11 @@ class DefaultContextTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return LoggerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return LoggerInterface|MockObject
      */
     protected function getMockLogger()
     {
-        $loggerInterface = $this->getMock('\Psr\Log\LoggerInterface');
+        $loggerInterface = $this->createMock('\Psr\Log\LoggerInterface');
         return $loggerInterface;
     }
 }
