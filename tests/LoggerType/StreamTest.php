@@ -26,7 +26,7 @@ class StreamTest extends TestCase
 
         rewind($resource);
         $logMessage = fgets($resource);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
     }
 
     public function testMessageFormatName()

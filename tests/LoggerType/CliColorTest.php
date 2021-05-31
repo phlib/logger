@@ -17,8 +17,8 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertNotContains("\033[", $logMessage);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringNotContainsString("\033[", $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
     }
 
     public function testLogInfo()
@@ -32,7 +32,7 @@ class CliColorTest extends TestCase
         rewind($resource);
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[34m", $logMessage);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
         $this->assertStringEndsWith("\033[39m\n", $logMessage);
     }
 
@@ -47,7 +47,7 @@ class CliColorTest extends TestCase
         rewind($resource);
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[32m", $logMessage);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
         $this->assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
@@ -62,7 +62,7 @@ class CliColorTest extends TestCase
         rewind($resource);
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[33m", $logMessage);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
         $this->assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
@@ -77,7 +77,7 @@ class CliColorTest extends TestCase
         rewind($resource);
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[31m", $logMessage);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
         $this->assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
@@ -92,7 +92,7 @@ class CliColorTest extends TestCase
         rewind($resource);
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[31;43m", $logMessage);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
         $this->assertStringEndsWith("\033[39;49m" . PHP_EOL, $logMessage);
     }
 
@@ -107,7 +107,7 @@ class CliColorTest extends TestCase
         rewind($resource);
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[37;41;1m", $logMessage);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
         $this->assertStringEndsWith("\033[39;49;22m" . PHP_EOL, $logMessage);
     }
 
@@ -122,7 +122,7 @@ class CliColorTest extends TestCase
         rewind($resource);
         $logMessage = fread($resource, 1024);
         $this->assertStringStartsWith("\033[37;41;1;4m", $logMessage);
-        $this->assertContains($message, $logMessage);
+        $this->assertStringContainsString($message, $logMessage);
         $this->assertStringEndsWith("\033[39;49;22;24m" . PHP_EOL, $logMessage);
     }
 }

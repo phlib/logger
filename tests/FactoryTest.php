@@ -68,7 +68,7 @@ class FactoryTest extends TestCase
     public function testCreateCollectionLoggerWithInvalidConfig()
     {
         $this->expectException(\DomainException::class);
-        $this->expectExceptionMessageRegExp('/at index 0$/');
+        $this->expectExceptionMessageMatches('/at index 0$/');
 
         $invalidConfig = [
             'type' => '(invalid)',
