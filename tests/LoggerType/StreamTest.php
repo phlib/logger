@@ -113,11 +113,12 @@ class StreamTest extends TestCase
         $this->assertStringMatchesFormat('%d/%d/%d' . PHP_EOL, $logMessage);
     }
 
-    public function testStringResource()
+    public function testStringCannotOpenException()
     {
-        $stream = new Stream('name', 'php://memory');
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Unable to open');
 
-        $this->assertAttributeInternalType('resource', 'stream', $stream);
+        new Stream('name', __DIR__ . '/path/what/does/not/exist');
     }
 
     public function testFormatContextBoolean()

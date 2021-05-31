@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- Exception thrown if string parameter for `LoggerType\Stream` cannot be 
+  opened for writing.
 ### Removed
 - **BC break**: Removed support for PHP versions <= 7.2 as they are no longer
   [actively supported](https://php.net/supported-versions.php)

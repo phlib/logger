@@ -39,7 +39,10 @@ class Stream extends AbstractLogger
         $this->name = trim(str_replace(["\r", "\n"], '', $name));
 
         if (!is_resource($stream)) {
-            $stream = fopen($stream, 'a');
+            $stream = @fopen($stream, 'a');
+            if ($stream === false) {
+                throw new \RuntimeException('Unable to open stream for given path');
+            }
         }
         $this->stream = $stream;
     }
