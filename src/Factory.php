@@ -118,7 +118,7 @@ class Factory
                     $logger = $this->createLogger($name, $logger);
                 } catch (\DomainException $e) {
                     $message = sprintf('%s at index %d', $e->getMessage(), $index);
-                    throw new \DomainException($message, null, $e);
+                    throw new \DomainException($message, 0, $e);
                 }
             }
             $loggerCollection->add($logger);
