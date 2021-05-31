@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
+- Add specific support for PHP v8
 - Strict type declarations to match existing docblocks. Possible **BC break** 
   if an implementation extends package classes or implements package interfaces.
 - Exception thrown if string parameter for `LoggerType\Stream` cannot be 
