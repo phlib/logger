@@ -38,5 +38,10 @@
         "psr-4": {
             "Phlib\\Logger\\Test\\": "tests"
         }
+    },
+
+    "scripts": {
+        "cs-check": "phpcs --standard=PSR12 src/ tests/",
+        "cs-fix": "phpcbf --standard=PSR12 src/ tests/"
     }
 }

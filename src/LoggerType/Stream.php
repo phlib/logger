@@ -171,13 +171,10 @@ class Stream extends AbstractLogger
 
         if (is_bool($val)) {
             return var_export($val, true);
-
         } elseif (is_scalar($val)) {
             return (string)$val;
-
         } elseif (is_null($val)) {
             return 'NULL';
-
         } elseif (is_object($val)) {
             if (is_callable(array($val, '__toString'))) {
                 return (string)$val;

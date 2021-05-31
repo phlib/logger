@@ -14,5 +14,4 @@ interface ConfigInterface
      * @return array
      */
     public function getLoggerConfig($name);
-
 }

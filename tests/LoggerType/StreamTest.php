@@ -1,4 +1,5 @@
 <?php
+
 namespace Phlib\Logger\Test\LoggerType;
 
 use Phlib\Logger\LoggerType\Stream;

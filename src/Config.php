@@ -57,5 +57,4 @@ class Config implements ConfigInterface
 
         return $loggerConfig;
     }
-
 }

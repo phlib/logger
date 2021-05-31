@@ -152,5 +152,4 @@ class Factory
 
         return new \Gelf\Logger($messagePublisher, $name);
     }
-
 }
