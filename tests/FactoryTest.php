@@ -143,6 +143,12 @@ class FactoryTest extends TestCase
 
         $factory = new Factory();
         $factory->unregisterDecorator($configKey);
+
+        // If first unregister has succeeded, second call will throw exception
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('key not registered');
+
+        $factory->unregisterDecorator($configKey);
     }
 
     public function testUnregisterDecoratorNotSet()
