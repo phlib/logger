@@ -133,7 +133,7 @@ class Factory
      */
     public function createStreamLogger($name, $config)
     {
-        $path = isset($config['path']) ? $config['path'] : false;
+        $path = $config['path'] ?? false;
         return new LoggerType\Stream($name, $path);
     }
 
@@ -144,8 +144,8 @@ class Factory
      */
     public function createGelfLogger($name, $config)
     {
-        $host = isset($config['host']) ? $config['host'] : false;
-        $port = isset($config['port']) ? $config['port'] : 12201;
+        $host = $config['host'] ?? false;
+        $port = $config['port'] ?? 12201;
 
         $transport        = new \Gelf\Transport\UdpTransport($host, $port);
         $messagePublisher = new \Gelf\Publisher($transport);

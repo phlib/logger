@@ -48,7 +48,7 @@ class Config implements ConfigInterface
         $loggerConfig = $name;
 
         do {
-            $loggerConfig = isset($this->config[$loggerConfig]) ? $this->config[$loggerConfig] : [];
+            $loggerConfig = $this->config[$loggerConfig] ?? [];
         } while (is_string($loggerConfig));
 
         if (!is_array($loggerConfig)) {
