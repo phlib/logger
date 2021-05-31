@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.0.0] - 2021-05-31
 ### Added
 - Add specific support for PHP v8
 - Strict type declarations to match existing docblocks. Possible **BC break** 
