@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Phlib\Logger\Test\LoggerType;
 
 use Phlib\Logger\LoggerType\Collection;
