@@ -11,7 +11,7 @@ class CollectionTest extends TestCase
     public function testIsPsrLog()
     {
         $logger = new Collection();
-        $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $logger);
+        static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $logger);
     }
 
 
@@ -21,18 +21,18 @@ class CollectionTest extends TestCase
 
         // Add a logger to the collection
         $subLogger1 = $this->getMockLoggerInterface();
-        $subLogger1->expects($this->once())->method('log');
+        $subLogger1->expects(static::once())->method('log');
         $logger->add($subLogger1);
 
         // Add another logger to the collection
         // We will remove it before it gets called
         $subLogger2 = $this->getMockLoggerInterface();
-        $subLogger2->expects($this->never())->method('log');
+        $subLogger2->expects(static::never())->method('log');
         $logger->add($subLogger2);
 
         // Add another logger to the collection
         $subLogger3 = $this->getMockLoggerInterface();
-        $subLogger3->expects($this->once())->method('log');
+        $subLogger3->expects(static::once())->method('log');
         $logger->add($subLogger3);
 
         // Remove Logger 2 from the collection

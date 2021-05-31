@@ -20,7 +20,7 @@ class ConfigTest extends TestCase
             'loggers' => []
         ];
 
-        $this->assertEquals($expected, $config->getLoggerConfig('test'));
+        static::assertEquals($expected, $config->getLoggerConfig('test'));
     }
 
     public function testStream()
@@ -36,7 +36,7 @@ class ConfigTest extends TestCase
 
         $config = new Config($configArray);
 
-        $this->assertEquals($streamConfig, $config->getLoggerConfig('test'));
+        static::assertEquals($streamConfig, $config->getLoggerConfig('test'));
     }
 
     public function testCollectionCoerce()
@@ -60,7 +60,7 @@ class ConfigTest extends TestCase
             ]
         ];
 
-        $this->assertEquals($expected, $config->getLoggerConfig('test'));
+        static::assertEquals($expected, $config->getLoggerConfig('test'));
     }
 
     public function testAlias()
@@ -79,7 +79,7 @@ class ConfigTest extends TestCase
 
         $config = new Config($configArray);
 
-        $this->assertEquals($streamConfig, $config->getLoggerConfig('test'));
+        static::assertEquals($streamConfig, $config->getLoggerConfig('test'));
     }
 
     public function testInvalidLoggerConfigType()
@@ -95,6 +95,6 @@ class ConfigTest extends TestCase
             'loggers' => []
         ];
 
-        $this->assertEquals($expected, $config->getLoggerConfig('test'));
+        static::assertEquals($expected, $config->getLoggerConfig('test'));
     }
 }

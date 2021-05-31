@@ -12,7 +12,7 @@ class LevelFilterTest extends TestCase
     public function testIsPsrLog()
     {
         $levelFilter = new LevelFilter($this->getMockLoggerInterface(), LogLevel::DEBUG);
-        $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $levelFilter);
+        static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $levelFilter);
     }
 
     public function testLog()
@@ -21,7 +21,7 @@ class LevelFilterTest extends TestCase
 
         // We expect this test to call the loggerInterface twice to log the ERROR and CRITICAL messages
         // and to ignore the WARNING log message
-        $loggerInterface->expects($this->exactly(2))
+        $loggerInterface->expects(static::exactly(2))
             ->method('log')
             ->withConsecutive(
                 [LogLevel::ERROR],

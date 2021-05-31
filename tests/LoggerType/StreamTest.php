@@ -13,7 +13,7 @@ class StreamTest extends TestCase
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
 
-        $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $stream);
+        static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $stream);
     }
 
     public function testLog()
@@ -26,7 +26,7 @@ class StreamTest extends TestCase
 
         rewind($resource);
         $logMessage = fgets($resource);
-        $this->assertStringContainsString($message, $logMessage);
+        static::assertStringContainsString($message, $logMessage);
     }
 
     public function testMessageFormatName()
@@ -41,7 +41,7 @@ class StreamTest extends TestCase
         rewind($resource);
         $logMessage = fgets($resource);
 
-        $this->assertEquals($streamName . PHP_EOL, $logMessage);
+        static::assertEquals($streamName . PHP_EOL, $logMessage);
     }
 
     public function testMessageFormatLevel()
@@ -55,7 +55,7 @@ class StreamTest extends TestCase
 
         rewind($resource);
         $logMessage = fgets($resource);
-        $this->assertEquals($level . PHP_EOL, $logMessage);
+        static::assertEquals($level . PHP_EOL, $logMessage);
     }
 
     public function testMessageFormatMessage()
@@ -69,7 +69,7 @@ class StreamTest extends TestCase
 
         rewind($resource);
         $logMessage = fgets($resource);
-        $this->assertEquals($message . PHP_EOL, $logMessage);
+        static::assertEquals($message . PHP_EOL, $logMessage);
     }
 
     public function testMessageFormatContext()
@@ -94,7 +94,7 @@ class StreamTest extends TestCase
         $context['exception'] = (string)$contextException;
         $contextString = json_encode($context, JSON_UNESCAPED_SLASHES);
 
-        $this->assertEquals($contextString . PHP_EOL, $logMessage);
+        static::assertEquals($contextString . PHP_EOL, $logMessage);
     }
 
     public function testNewDateFormat()
@@ -110,7 +110,7 @@ class StreamTest extends TestCase
         rewind($resource);
         $logMessage = fgets($resource);
 
-        $this->assertStringMatchesFormat('%d/%d/%d' . PHP_EOL, $logMessage);
+        static::assertStringMatchesFormat('%d/%d/%d' . PHP_EOL, $logMessage);
     }
 
     public function testStringCannotOpenException()
@@ -135,7 +135,7 @@ class StreamTest extends TestCase
         rewind($resource);
         $logMessage = fgets($resource);
 
-        $this->assertEquals('true' . PHP_EOL, $logMessage);
+        static::assertEquals('true' . PHP_EOL, $logMessage);
     }
 
     public function testFormatContextString()
@@ -152,7 +152,7 @@ class StreamTest extends TestCase
         rewind($resource);
         $logMessage = fgets($resource);
 
-        $this->assertEquals('value' . PHP_EOL, $logMessage);
+        static::assertEquals('value' . PHP_EOL, $logMessage);
     }
 
     public function testFormatContextNull()
@@ -169,7 +169,7 @@ class StreamTest extends TestCase
         rewind($resource);
         $logMessage = fgets($resource);
 
-        $this->assertEquals('NULL' . PHP_EOL, $logMessage);
+        static::assertEquals('NULL' . PHP_EOL, $logMessage);
     }
 
     public function testFormatContextClass()
@@ -188,7 +188,7 @@ class StreamTest extends TestCase
         rewind($resource);
         $logMessage = fgets($resource);
 
-        $this->assertEquals(\stdClass::class . PHP_EOL, $logMessage);
+        static::assertEquals(\stdClass::class . PHP_EOL, $logMessage);
     }
 
     public function testFormatContextRawType()
@@ -205,6 +205,6 @@ class StreamTest extends TestCase
         rewind($resource);
         $logMessage = fgets($resource);
 
-        $this->assertEquals('array' . PHP_EOL, $logMessage);
+        static::assertEquals('array' . PHP_EOL, $logMessage);
     }
 }

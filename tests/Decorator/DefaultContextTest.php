@@ -12,7 +12,7 @@ class DefaultContextTest extends TestCase
     public function testIsPsrLog()
     {
         $decorator = new DefaultContext($this->getMockLogger(), []);
-        $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $decorator);
+        static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $decorator);
     }
 
     /**
@@ -22,11 +22,11 @@ class DefaultContextTest extends TestCase
     {
         $loggerInterface = $this->getMockLogger();
 
-        $loggerInterface->expects($this->once())
+        $loggerInterface->expects(static::once())
             ->method('log')
             ->with(
-                $this->anything(),
-                $this->anything(),
+                static::anything(),
+                static::anything(),
                 $expected
             );
 

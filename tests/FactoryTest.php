@@ -16,7 +16,7 @@ class FactoryTest extends TestCase
         $fh = fopen('php://memory', 'a');
         $logger = $factory->createStreamLogger('test', [ 'path' => $fh ]);
 
-        $this->assertInstanceOf(\Phlib\Logger\LoggerType\Stream::class, $logger);
+        static::assertInstanceOf(\Phlib\Logger\LoggerType\Stream::class, $logger);
     }
 
     public function testCreateGelfLogger()
@@ -25,7 +25,7 @@ class FactoryTest extends TestCase
 
         $logger = $factory->createGelfLogger('test', [ 'host' => '127.0.0.1' ]);
 
-        $this->assertInstanceOf(\Gelf\Logger::class, $logger);
+        static::assertInstanceOf(\Gelf\Logger::class, $logger);
     }
 
     public function testCreateCollectionLoggerEmpty()
@@ -35,7 +35,7 @@ class FactoryTest extends TestCase
             'loggers' => []
         ]);
 
-        $this->assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
+        static::assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
     }
 
     public function testCreateCollectionLoggerExistingLogger()
@@ -47,7 +47,7 @@ class FactoryTest extends TestCase
             'loggers' => [$existingLogger]
         ]);
 
-        $this->assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
+        static::assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
     }
 
     public function testCreateCollectionLoggerWithConfig()
@@ -62,7 +62,7 @@ class FactoryTest extends TestCase
             'loggers' => [$gelfConfig]
         ]);
 
-        $this->assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
+        static::assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
     }
 
     public function testCreateCollectionLoggerWithInvalidConfig()
@@ -90,7 +90,7 @@ class FactoryTest extends TestCase
             'path' => $fh
         ]);
 
-        $this->assertInstanceOf(\Phlib\Logger\LoggerType\Stream::class, $logger);
+        static::assertInstanceOf(\Phlib\Logger\LoggerType\Stream::class, $logger);
     }
 
     public function testCreateLoggerGelfUnfiltered()
@@ -101,7 +101,7 @@ class FactoryTest extends TestCase
             'host' => '127.0.0.1'
         ]);
 
-        $this->assertInstanceOf(\Gelf\Logger::class, $logger);
+        static::assertInstanceOf(\Gelf\Logger::class, $logger);
     }
 
     public function testCreateLoggerCollectionUnfiltered()
@@ -112,7 +112,7 @@ class FactoryTest extends TestCase
             'loggers' => []
         ]);
 
-        $this->assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
+        static::assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
     }
 
     public function testDecoratorLevelIsRegisteredKey()
@@ -174,8 +174,8 @@ class FactoryTest extends TestCase
             'path'  => $fh
         ]);
 
-        $this->assertNotInstanceOf(\Phlib\Logger\Decorator\LevelFilter::class, $logger);
-        $this->assertInstanceOf(\Phlib\Logger\LoggerType\Stream::class, $logger);
+        static::assertNotInstanceOf(\Phlib\Logger\Decorator\LevelFilter::class, $logger);
+        static::assertInstanceOf(\Phlib\Logger\LoggerType\Stream::class, $logger);
     }
 
     public function testCreateLoggerDecorator()
@@ -191,7 +191,7 @@ class FactoryTest extends TestCase
             'path'  => $fh
         ]);
 
-        $this->assertInstanceOf(\Phlib\Logger\Decorator\LevelFilter::class, $logger);
+        static::assertInstanceOf(\Phlib\Logger\Decorator\LevelFilter::class, $logger);
     }
 
     public function testRegisterDecoratorMissing()

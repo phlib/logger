@@ -17,8 +17,8 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertStringNotContainsString("\033[", $logMessage);
-        $this->assertStringContainsString($message, $logMessage);
+        static::assertStringNotContainsString("\033[", $logMessage);
+        static::assertStringContainsString($message, $logMessage);
     }
 
     public function testLogInfo()
@@ -31,9 +31,9 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertStringStartsWith("\033[34m", $logMessage);
-        $this->assertStringContainsString($message, $logMessage);
-        $this->assertStringEndsWith("\033[39m\n", $logMessage);
+        static::assertStringStartsWith("\033[34m", $logMessage);
+        static::assertStringContainsString($message, $logMessage);
+        static::assertStringEndsWith("\033[39m\n", $logMessage);
     }
 
     public function testLogNotice()
@@ -46,9 +46,9 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertStringStartsWith("\033[32m", $logMessage);
-        $this->assertStringContainsString($message, $logMessage);
-        $this->assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
+        static::assertStringStartsWith("\033[32m", $logMessage);
+        static::assertStringContainsString($message, $logMessage);
+        static::assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
     public function testLogWarning()
@@ -61,9 +61,9 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertStringStartsWith("\033[33m", $logMessage);
-        $this->assertStringContainsString($message, $logMessage);
-        $this->assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
+        static::assertStringStartsWith("\033[33m", $logMessage);
+        static::assertStringContainsString($message, $logMessage);
+        static::assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
     public function testLogError()
@@ -76,9 +76,9 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertStringStartsWith("\033[31m", $logMessage);
-        $this->assertStringContainsString($message, $logMessage);
-        $this->assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
+        static::assertStringStartsWith("\033[31m", $logMessage);
+        static::assertStringContainsString($message, $logMessage);
+        static::assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
     public function testLogCritical()
@@ -91,9 +91,9 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertStringStartsWith("\033[31;43m", $logMessage);
-        $this->assertStringContainsString($message, $logMessage);
-        $this->assertStringEndsWith("\033[39;49m" . PHP_EOL, $logMessage);
+        static::assertStringStartsWith("\033[31;43m", $logMessage);
+        static::assertStringContainsString($message, $logMessage);
+        static::assertStringEndsWith("\033[39;49m" . PHP_EOL, $logMessage);
     }
 
     public function testLogAlert()
@@ -106,9 +106,9 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertStringStartsWith("\033[37;41;1m", $logMessage);
-        $this->assertStringContainsString($message, $logMessage);
-        $this->assertStringEndsWith("\033[39;49;22m" . PHP_EOL, $logMessage);
+        static::assertStringStartsWith("\033[37;41;1m", $logMessage);
+        static::assertStringContainsString($message, $logMessage);
+        static::assertStringEndsWith("\033[39;49;22m" . PHP_EOL, $logMessage);
     }
 
     public function testLogEmergency()
@@ -121,8 +121,8 @@ class CliColorTest extends TestCase
 
         rewind($resource);
         $logMessage = fread($resource, 1024);
-        $this->assertStringStartsWith("\033[37;41;1;4m", $logMessage);
-        $this->assertStringContainsString($message, $logMessage);
-        $this->assertStringEndsWith("\033[39;49;22;24m" . PHP_EOL, $logMessage);
+        static::assertStringStartsWith("\033[37;41;1;4m", $logMessage);
+        static::assertStringContainsString($message, $logMessage);
+        static::assertStringEndsWith("\033[39;49;22;24m" . PHP_EOL, $logMessage);
     }
 }

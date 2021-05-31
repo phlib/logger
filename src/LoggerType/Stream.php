@@ -102,7 +102,7 @@ class Stream extends AbstractLogger
             'context'  => $this->formatContext($context)
         ];
 
-        $message = $this->interpolate($this->getMessageFormat($level, $context), $meta);
+        $message = static::interpolate($this->getMessageFormat($level, $context), $meta);
 
         fwrite($this->stream, $message . PHP_EOL);
     }
@@ -114,7 +114,7 @@ class Stream extends AbstractLogger
      */
     protected function formatMessage($message, array $context)
     {
-        $message = $this->interpolate($message, $context);
+        $message = static::interpolate($message, $context);
         $message = trim(str_replace(["\r", "\n"], ' ', $message));
 
         return $message;

@@ -17,21 +17,21 @@ class PoolTest extends TestCase
         ];
 
         $config  = $this->createMock(\Phlib\Logger\Config::class);
-        $config->expects($this->once())
+        $config->expects(static::once())
             ->method('getLoggerConfig')
-            ->with($this->equalTo('test'))
-            ->will($this->returnValue($loggerConfig));
+            ->with(static::equalTo('test'))
+            ->will(static::returnValue($loggerConfig));
 
         $factory = $this->createMock(\Phlib\Logger\Factory::class);
         $logger  = $this->createMock(\Phlib\Logger\LoggerType\Collection::class);
-        $factory->expects($this->once())
+        $factory->expects(static::once())
             ->method('createLogger')
-            ->with($this->equalTo('test'), $this->equalTo($loggerConfig))
-            ->will($this->returnValue($logger));
+            ->with(static::equalTo('test'), static::equalTo($loggerConfig))
+            ->will(static::returnValue($logger));
 
         $pool = new Pool($config, $factory);
 
-        $this->assertSame($logger, $pool->test);
+        static::assertSame($logger, $pool->test);
     }
 
     public function testGetLoggerAgain()
@@ -42,25 +42,25 @@ class PoolTest extends TestCase
         ];
 
         $config  = $this->createMock(\Phlib\Logger\Config::class);
-        $config->expects($this->once())
+        $config->expects(static::once())
             ->method('getLoggerConfig')
-            ->with($this->equalTo('test'))
-            ->will($this->returnValue($loggerConfig));
+            ->with(static::equalTo('test'))
+            ->will(static::returnValue($loggerConfig));
 
         $factory = $this->createMock(\Phlib\Logger\Factory::class);
         $logger  = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
-        $factory->expects($this->once())
+        $factory->expects(static::once())
             ->method('createLogger')
-            ->with($this->equalTo('test'), $this->equalTo($loggerConfig))
-            ->will($this->returnValue($logger));
+            ->with(static::equalTo('test'), static::equalTo($loggerConfig))
+            ->will(static::returnValue($logger));
 
         $pool = new Pool($config, $factory);
 
         $actualLogger = $pool->test;
 
-        $this->assertSame($logger, $actualLogger);
+        static::assertSame($logger, $actualLogger);
 
-        $this->assertSame($actualLogger, $pool->test);
+        static::assertSame($actualLogger, $pool->test);
     }
 
     public function testPrefix()
@@ -74,22 +74,22 @@ class PoolTest extends TestCase
         ];
 
         $config  = $this->createMock(\Phlib\Logger\Config::class);
-        $config->expects($this->once())
+        $config->expects(static::once())
             ->method('getLoggerConfig')
-            ->with($this->equalTo('test'))
-            ->will($this->returnValue($loggerConfig));
+            ->with(static::equalTo('test'))
+            ->will(static::returnValue($loggerConfig));
 
         $factory = $this->createMock(\Phlib\Logger\Factory::class);
         $logger  = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
-        $factory->expects($this->once())
+        $factory->expects(static::once())
             ->method('createLogger')
-            ->with($this->equalTo($prefix . 'test'))
-            ->will($this->returnValue($logger));
+            ->with(static::equalTo($prefix . 'test'))
+            ->will(static::returnValue($logger));
 
         $pool = new Pool($config, $factory);
         $pool->setPrefix($prefix);
 
-        $this->assertSame($logger, $pool->test);
+        static::assertSame($logger, $pool->test);
     }
 
     public function testGetLoggerCollection()
@@ -101,33 +101,33 @@ class PoolTest extends TestCase
         ];
 
         $config  = $this->createMock(\Phlib\Logger\Config::class);
-        $config->expects($this->once())
+        $config->expects(static::once())
             ->method('getLoggerConfig')
-            ->with($this->equalTo('test'))
-            ->will($this->returnValue($loggerConfig));
+            ->with(static::equalTo('test'))
+            ->will(static::returnValue($loggerConfig));
 
         $factory          = $this->createMock(\Phlib\Logger\Factory::class);
         $streamLogger     = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
         $collectionLogger = $this->createMock(\Phlib\Logger\LoggerType\Collection::class);
-        $factory->expects($this->once())
+        $factory->expects(static::once())
             ->method('createLogger')
             ->with(
-                $this->equalTo('test'),
-                $this->equalTo($loggerConfig)
+                static::equalTo('test'),
+                static::equalTo($loggerConfig)
             )
-            ->will($this->returnValue($streamLogger));
-        $factory->expects($this->once())
+            ->will(static::returnValue($streamLogger));
+        $factory->expects(static::once())
             ->method('createCollectionLogger')
             ->with(
-                $this->equalTo('test'),
-                $this->equalTo([
+                static::equalTo('test'),
+                static::equalTo([
                     'loggers' => [$streamLogger]
                 ])
             )
-            ->will($this->returnValue($collectionLogger));
+            ->will(static::returnValue($collectionLogger));
 
         $pool = new Pool($config, $factory);
 
-        $this->assertSame($collectionLogger, $pool->getLoggerCollection('test'));
+        static::assertSame($collectionLogger, $pool->getLoggerCollection('test'));
     }
 }
