@@ -67,7 +67,7 @@ class Stream extends AbstractLogger
      * @param array $context
      * @return string
      */
-    protected function getMessageFormat($level, array $context = array())
+    protected function getMessageFormat($level, array $context = [])
     {
         return $this->messageFormat;
     }
@@ -92,7 +92,7 @@ class Stream extends AbstractLogger
      *
      * @return void
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $meta = [
             'datetime' => date($this->dateFormat),
@@ -149,7 +149,7 @@ class Stream extends AbstractLogger
     private static function interpolate($message, array $context)
     {
         // build a replacement array with braces around the context keys
-        $replace = array();
+        $replace = [];
 
         foreach ($context as $key => $val) {
             $val = static::contextValueToString($val);
@@ -176,7 +176,7 @@ class Stream extends AbstractLogger
         } elseif (is_null($val)) {
             return 'NULL';
         } elseif (is_object($val)) {
-            if (is_callable(array($val, '__toString'))) {
+            if (is_callable([$val, '__toString'])) {
                 return (string)$val;
             }
             return get_class($val);

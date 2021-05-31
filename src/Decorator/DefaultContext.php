@@ -38,7 +38,7 @@ class DefaultContext extends AbstractDecorator
      *
      * @return void
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $context = array_merge($this->decorations, $context);
 

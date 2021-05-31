@@ -17,7 +17,7 @@ class LevelFilter extends AbstractDecorator
      *
      * @var string[] $levels Logging levels
      */
-    private static $levels = array(
+    private static $levels = [
         LogLevel::EMERGENCY, // 0
         LogLevel::ALERT,     // 1
         LogLevel::CRITICAL,  // 2
@@ -26,7 +26,7 @@ class LevelFilter extends AbstractDecorator
         LogLevel::NOTICE,    // 5
         LogLevel::INFO,      // 6
         LogLevel::DEBUG      // 7
-    );
+    ];
 
     /**
      * @var int
@@ -61,7 +61,7 @@ class LevelFilter extends AbstractDecorator
      *
      * @return void
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $levelCode = array_search($level, self::$levels, true);
         if ($levelCode === false) {

@@ -46,7 +46,7 @@ class CliColor extends Stream
      * @param array $context
      * @return string
      */
-    protected function getMessageFormat($level, array $context = array())
+    protected function getMessageFormat($level, array $context = [])
     {
         $parentFormat = parent::getMessageFormat($level, $context);
         $consoleFormat = "<{$level}>{$parentFormat}</{$level}>";

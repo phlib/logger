@@ -56,7 +56,7 @@ class Collection extends AbstractLogger
      *
      * @return void
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         foreach ($this->loggerInstances as $logger) {
             $logger->log($level, $message, $context);
