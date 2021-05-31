@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
+- Strict type declarations to match existing docblocks. Possible **BC break** 
+  if an implementation extends package classes or implements package interfaces.
 - Exception thrown if string parameter for `LoggerType\Stream` cannot be 
   opened for writing.
 ### Removed

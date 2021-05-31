@@ -20,10 +20,6 @@ class DefaultContext extends AbstractDecorator
      */
     private $decorations;
 
-    /**
-     * @param LoggerInterface $logger
-     * @param array $decorations
-     */
     public function __construct(LoggerInterface $logger, array $decorations)
     {
         parent::__construct($logger, $decorations);
@@ -40,7 +36,7 @@ class DefaultContext extends AbstractDecorator
      *
      * @return void
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         $context = array_merge($this->decorations, $context);
 

@@ -35,11 +35,7 @@ class LevelFilter extends AbstractDecorator
      */
     private $logLevel;
 
-    /**
-     * @param LoggerInterface $logger
-     * @param string $level \Psr\Log\LogLevel string
-     */
-    public function __construct(LoggerInterface $logger, $level)
+    public function __construct(LoggerInterface $logger, string $level)
     {
         parent::__construct($logger, $level);
 
@@ -63,7 +59,7 @@ class LevelFilter extends AbstractDecorator
      *
      * @return void
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         $levelCode = array_search($level, self::$levels, true);
         if ($levelCode === false) {

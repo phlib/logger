@@ -19,30 +19,19 @@ class Collection extends AbstractLogger
      */
     protected $loggerInstances;
 
-    /**
-     *
-     */
     public function __construct()
     {
         $this->loggerInstances = new \SplObjectStorage();
     }
 
-    /**
-     * @param LoggerInterface $logger
-     * @return $this
-     */
-    public function add(LoggerInterface $logger)
+    public function add(LoggerInterface $logger): self
     {
         $this->loggerInstances->attach($logger);
 
         return $this;
     }
 
-    /**
-     * @param LoggerInterface $logger
-     * @return $this
-     */
-    public function remove(LoggerInterface $logger)
+    public function remove(LoggerInterface $logger): self
     {
         $this->loggerInstances->detach($logger);
 
@@ -58,7 +47,7 @@ class Collection extends AbstractLogger
      *
      * @return void
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         foreach ($this->loggerInstances as $logger) {
             $logger->log($level, $message, $context);

@@ -34,38 +34,24 @@ class Pool
      */
     protected $loggerFactory;
 
-    /**
-     * @param ConfigInterface $config
-     * @param Factory $loggerFactory
-     */
     public function __construct(ConfigInterface $config, Factory $loggerFactory)
     {
         $this->config        = $config;
         $this->loggerFactory = $loggerFactory;
     }
 
-    /**
-     * @param $prefix
-     * @return $this
-     */
-    public function setPrefix($prefix)
+    public function setPrefix(string $prefix): self
     {
         $this->prefix = $prefix;
         return $this;
     }
-    /**
-     * @return string
-     */
-    public function getPrefix()
+
+    public function getPrefix(): string
     {
         return $this->prefix;
     }
 
-    /**
-     * @param string $name
-     * @return LoggerInterface
-     */
-    public function getLogger($name)
+    public function getLogger(string $name): LoggerInterface
     {
         if (!isset($this->loggerInstances[$name])) {
             $this->loggerInstances[$name] = $this->createLogger($name);
@@ -73,11 +59,7 @@ class Pool
         return $this->loggerInstances[$name];
     }
 
-    /**
-     * @param string $name
-     * @return Collection
-     */
-    public function getLoggerCollection($name)
+    public function getLoggerCollection(string $name): Collection
     {
         $logger = $this->getLogger($name);
 
@@ -90,22 +72,14 @@ class Pool
         return $logger;
     }
 
-    /**
-     * @param string $name
-     * @return LoggerInterface
-     */
-    protected function createLogger($name)
+    protected function createLogger(string $name): LoggerInterface
     {
         $loggerConfig = $this->config->getLoggerConfig($name);
 
         return $this->loggerFactory->createLogger($this->getPrefix() . $name, $loggerConfig);
     }
 
-    /**
-     * @param string $name
-     * @return LoggerInterface
-     */
-    public function __get($name)
+    public function __get(string $name): LoggerInterface
     {
         return $this->getLogger($name);
     }

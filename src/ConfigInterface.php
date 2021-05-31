@@ -11,9 +11,5 @@ namespace Phlib\Logger;
 interface ConfigInterface
 {
 
-    /**
-     * @param string $name
-     * @return array
-     */
-    public function getLoggerConfig($name);
+    public function getLoggerConfig(string $name): array;
 }

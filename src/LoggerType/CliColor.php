@@ -26,7 +26,7 @@ class CliColor extends Stream
      * @param string $name
      * @param resource|string $stream Optional. Default to Standard Error
      */
-    public function __construct($name, $stream = STDERR)
+    public function __construct(string $name, $stream = STDERR)
     {
         parent::__construct($name, $stream);
 
@@ -48,7 +48,7 @@ class CliColor extends Stream
      * @param array $context
      * @return string
      */
-    protected function getMessageFormat($level, array $context = [])
+    protected function getMessageFormat($level, array $context = []): string
     {
         $parentFormat = parent::getMessageFormat($level, $context);
         $consoleFormat = "<{$level}>{$parentFormat}</{$level}>";

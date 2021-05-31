@@ -33,10 +33,7 @@ abstract class AbstractDecorator extends AbstractLogger
         $this->logger = $logger;
     }
 
-    /**
-     * @return LoggerInterface
-     */
-    protected function getInnerLogger()
+    protected function getInnerLogger(): LoggerInterface
     {
         return $this->logger;
     }

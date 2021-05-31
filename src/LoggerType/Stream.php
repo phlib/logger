@@ -36,7 +36,7 @@ class Stream extends AbstractLogger
      * @param string $name
      * @param resource|string $stream
      */
-    public function __construct($name, $stream)
+    public function __construct(string $name, $stream)
     {
         $this->name = trim(str_replace(["\r", "\n"], '', $name));
 
@@ -49,11 +49,7 @@ class Stream extends AbstractLogger
         $this->stream = $stream;
     }
 
-    /**
-     * @param string $format
-     * @return $this
-     */
-    public function setMessageFormat($format)
+    public function setMessageFormat(string $format): self
     {
         $this->messageFormat = $format;
 
@@ -69,16 +65,12 @@ class Stream extends AbstractLogger
      * @param array $context
      * @return string
      */
-    protected function getMessageFormat($level, array $context = [])
+    protected function getMessageFormat($level, array $context = []): string
     {
         return $this->messageFormat;
     }
 
-    /**
-     * @param string $format
-     * @return $this
-     */
-    public function setDateFormat($format)
+    public function setDateFormat(string $format): self
     {
         $this->dateFormat = $format;
 
@@ -94,7 +86,7 @@ class Stream extends AbstractLogger
      *
      * @return void
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         $meta = [
             'datetime' => date($this->dateFormat),
@@ -109,12 +101,7 @@ class Stream extends AbstractLogger
         fwrite($this->stream, $message . PHP_EOL);
     }
 
-    /**
-     * @param string $message
-     * @param array $context
-     * @return string
-     */
-    protected function formatMessage($message, array $context)
+    protected function formatMessage(string $message, array $context): string
     {
         $message = static::interpolate($message, $context);
         $message = trim(str_replace(["\r", "\n"], ' ', $message));
@@ -122,11 +109,7 @@ class Stream extends AbstractLogger
         return $message;
     }
 
-    /**
-     * @param array $context
-     * @return string
-     */
-    protected function formatContext(array $context)
+    protected function formatContext(array $context): string
     {
         if (isset($context['exception']) and $context['exception'] instanceof \Exception) {
             $context['exception'] = (string)$context['exception'];
@@ -148,7 +131,7 @@ class Stream extends AbstractLogger
      * @param array $context
      * @return string
      */
-    private static function interpolate($message, array $context)
+    private static function interpolate($message, array $context): string
     {
         // build a replacement array with braces around the context keys
         $replace = [];
@@ -168,7 +151,7 @@ class Stream extends AbstractLogger
      * @param mixed $val
      * @return string
      */
-    private static function contextValueToString($val)
+    private static function contextValueToString($val): string
     {
 
         if (is_bool($val)) {

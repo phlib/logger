@@ -28,7 +28,7 @@ class Factory
      * @param string $configKey
      * @param string $className
      */
-    public function registerDecorator($configKey, $className)
+    public function registerDecorator(string $configKey, string $className): void
     {
         if (isset($this->decorators[$configKey])) {
             throw new \RuntimeException('Decorator key already in use: ' . $configKey);
@@ -39,12 +39,7 @@ class Factory
         $this->decorators[$configKey] = $className;
     }
 
-    /**
-     * Un-register a decorator class
-     *
-     * @param string $configKey
-     */
-    public function unregisterDecorator($configKey)
+    public function unregisterDecorator(string $configKey): void
     {
         if (!isset($this->decorators[$configKey])) {
             throw new \RuntimeException('Decorator key not registered: ' . $configKey);
@@ -52,13 +47,7 @@ class Factory
         unset($this->decorators[$configKey]);
     }
 
-    /**
-     * @param string $name
-     * @param array $config
-     * @return LoggerInterface
-     * @throws \DomainException
-     */
-    public function createLogger($name, array $config)
+    public function createLogger(string $name, array $config): LoggerInterface
     {
         if (!isset($config['type'])) {
             throw new \DomainException('Logger config missing logger type');
@@ -78,15 +67,7 @@ class Factory
         return $logger;
     }
 
-    /**
-     * Apply any available decorators to the logger, if configured
-     *
-     * @param LoggerInterface $logger
-     * @param array $config
-     *
-     * @return LoggerInterface
-     */
-    private function applyDecorators(LoggerInterface $logger, array $config)
+    private function applyDecorators(LoggerInterface $logger, array $config): LoggerInterface
     {
         foreach ($this->decorators as $configKey => $decoratorClassName) {
             if (!isset($config[$configKey])) {
@@ -105,13 +86,7 @@ class Factory
         return $logger;
     }
 
-    /**
-     * @param string $name
-     * @param array $config
-     * @return LoggerType\Collection
-     * @throws \DomainException
-     */
-    public function createCollectionLogger($name, $config)
+    public function createCollectionLogger(string $name, array $config): LoggerType\Collection
     {
         $loggerCollection = new LoggerType\Collection();
         foreach ($config['loggers'] as $index => $logger) {
@@ -128,23 +103,13 @@ class Factory
         return $loggerCollection;
     }
 
-    /**
-     * @param string $name
-     * @param array $config
-     * @return LoggerType\Stream
-     */
-    public function createStreamLogger($name, $config)
+    public function createStreamLogger(string $name, array $config): LoggerType\Stream
     {
         $path = $config['path'] ?? false;
         return new LoggerType\Stream($name, $path);
     }
 
-    /**
-     * @param string $name
-     * @param array $config
-     * @return \Gelf\Logger
-     */
-    public function createGelfLogger($name, $config)
+    public function createGelfLogger(string $name, array $config): \Gelf\Logger
     {
         $host = $config['host'] ?? false;
         $port = $config['port'] ?? 12201;

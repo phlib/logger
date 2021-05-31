@@ -15,19 +15,12 @@ class Config implements ConfigInterface
      */
     protected $config;
 
-    /**
-     * @param array $config
-     */
     public function __construct(array $config)
     {
         $this->config = $config;
     }
 
-    /**
-     * @param string $name
-     * @return array
-     */
-    public function getLoggerConfig($name)
+    public function getLoggerConfig(string $name): array
     {
         $loggerConfig = $this->resolveAliases($name);
 
@@ -41,11 +34,7 @@ class Config implements ConfigInterface
         return $loggerConfig;
     }
 
-    /**
-     * @param string $name
-     * @return array
-     */
-    protected function resolveAliases($name)
+    protected function resolveAliases(string $name): array
     {
         $loggerConfig = $name;
 
