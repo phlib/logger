@@ -22,7 +22,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: mailparse
           coverage: xdebug
 
       - name: Cache Composer packages
@@ -41,6 +40,6 @@ jobs:
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: "Upload coverage to Codecov"
-        uses: "codecov/codecov-action@v1"
+        uses: "codecov/codecov-action@v2"
         with:
           fail_ci_if_error: true
