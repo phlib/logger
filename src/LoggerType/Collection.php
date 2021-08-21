@@ -39,16 +39,12 @@ class Collection extends AbstractLogger
     }
 
     /**
-     * Logs with an arbitrary level.
-     *
-     * @param mixed  $level
-     * @param string $message
-     * @param array  $context
-     *
-     * @return void
+     * @param mixed $level
+     * @param string|\Stringable $message
      */
     public function log($level, $message, array $context = []): void
     {
+        /** @var LoggerInterface $logger */
         foreach ($this->loggerInstances as $logger) {
             $logger->log($level, $message, $context);
         }
