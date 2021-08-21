@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Add support for `psr/log` v2 and v3.
+- Add support for passing `Stringable` objects as the `$message` parameter to
+  `log()` methods. 
 
 ## [4.0.0] - 2021-05-31
 ### Added

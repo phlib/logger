@@ -28,13 +28,8 @@ class DefaultContext extends AbstractDecorator
     }
 
     /**
-     * Logs with an arbitrary level.
-     *
-     * @param mixed  $level
-     * @param string $message
-     * @param array  $context
-     *
-     * @return void
+     * @param mixed $level
+     * @param string|\Stringable $message
      */
     public function log($level, $message, array $context = []): void
     {

@@ -78,13 +78,8 @@ class Stream extends AbstractLogger
     }
 
     /**
-     * Logs with an arbitrary level.
-     *
-     * @param mixed  $level
-     * @param string $message
-     * @param array  $context
-     *
-     * @return void
+     * @param mixed $level
+     * @param string|\Stringable $message
      */
     public function log($level, $message, array $context = []): void
     {
@@ -92,7 +87,7 @@ class Stream extends AbstractLogger
             'datetime' => date($this->dateFormat),
             'name'     => $this->name,
             'level'    => $level,
-            'message'  => $this->formatMessage($message, $context),
+            'message'  => $this->formatMessage((string)$message, $context),
             'context'  => $this->formatContext($context)
         ];
 
