@@ -10,13 +10,14 @@ use Psr\Log\LogLevel;
 
 class FactoryTest extends TestCase
 {
-
     public function testCreateStreamLogger()
     {
         $factory = new Factory();
 
         $fh = fopen('php://memory', 'a');
-        $logger = $factory->createStreamLogger('test', [ 'path' => $fh ]);
+        $logger = $factory->createStreamLogger('test', [
+            'path' => $fh,
+        ]);
 
         static::assertInstanceOf(\Phlib\Logger\LoggerType\Stream::class, $logger);
     }
@@ -25,7 +26,9 @@ class FactoryTest extends TestCase
     {
         $factory = new Factory();
 
-        $logger = $factory->createGelfLogger('test', [ 'host' => '127.0.0.1' ]);
+        $logger = $factory->createGelfLogger('test', [
+            'host' => '127.0.0.1',
+        ]);
 
         static::assertInstanceOf(\Gelf\Logger::class, $logger);
     }
@@ -33,8 +36,8 @@ class FactoryTest extends TestCase
     public function testCreateCollectionLoggerEmpty()
     {
         $factory = new Factory();
-        $logger  = $factory->createCollectionLogger('test', [
-            'loggers' => []
+        $logger = $factory->createCollectionLogger('test', [
+            'loggers' => [],
         ]);
 
         static::assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
@@ -45,8 +48,8 @@ class FactoryTest extends TestCase
         $existingLogger = $this->createMock(\Psr\Log\LoggerInterface::class);
 
         $factory = new Factory();
-        $logger  = $factory->createCollectionLogger('test', [
-            'loggers' => [$existingLogger]
+        $logger = $factory->createCollectionLogger('test', [
+            'loggers' => [$existingLogger],
         ]);
 
         static::assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
@@ -56,12 +59,12 @@ class FactoryTest extends TestCase
     {
         $gelfConfig = [
             'type' => 'gelf',
-            'host' => '127.0.0.1'
+            'host' => '127.0.0.1',
         ];
 
         $factory = new Factory();
-        $logger  = $factory->createCollectionLogger('test', [
-            'loggers' => [$gelfConfig]
+        $logger = $factory->createCollectionLogger('test', [
+            'loggers' => [$gelfConfig],
         ]);
 
         static::assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
@@ -78,7 +81,7 @@ class FactoryTest extends TestCase
 
         $factory = new Factory();
         $factory->createCollectionLogger('test', [
-            'loggers' => [$invalidConfig]
+            'loggers' => [$invalidConfig],
         ]);
     }
 
@@ -87,9 +90,9 @@ class FactoryTest extends TestCase
         $fh = fopen('php://memory', 'a');
 
         $factory = new Factory();
-        $logger  = $factory->createLogger('test', [
+        $logger = $factory->createLogger('test', [
             'type' => 'stream',
-            'path' => $fh
+            'path' => $fh,
         ]);
 
         static::assertInstanceOf(\Phlib\Logger\LoggerType\Stream::class, $logger);
@@ -98,9 +101,9 @@ class FactoryTest extends TestCase
     public function testCreateLoggerGelfUnfiltered()
     {
         $factory = new Factory();
-        $logger  = $factory->createLogger('test', [
+        $logger = $factory->createLogger('test', [
             'type' => 'gelf',
-            'host' => '127.0.0.1'
+            'host' => '127.0.0.1',
         ]);
 
         static::assertInstanceOf(\Gelf\Logger::class, $logger);
@@ -109,9 +112,9 @@ class FactoryTest extends TestCase
     public function testCreateLoggerCollectionUnfiltered()
     {
         $factory = new Factory();
-        $logger  = $factory->createLogger('test', [
-            'type'    => 'collection',
-            'loggers' => []
+        $logger = $factory->createLogger('test', [
+            'type' => 'collection',
+            'loggers' => [],
         ]);
 
         static::assertInstanceOf(\Phlib\Logger\LoggerType\Collection::class, $logger);
@@ -170,10 +173,10 @@ class FactoryTest extends TestCase
 
         $factory = new Factory();
         $factory->unregisterDecorator('level');
-        $logger  = $factory->createLogger('test', [
-            'type'   => 'stream',
+        $logger = $factory->createLogger('test', [
+            'type' => 'stream',
             'level' => LogLevel::ERROR,
-            'path'  => $fh
+            'path' => $fh,
         ]);
 
         static::assertNotInstanceOf(\Phlib\Logger\Decorator\LevelFilter::class, $logger);
@@ -187,10 +190,10 @@ class FactoryTest extends TestCase
         $factory = new Factory();
         $factory->unregisterDecorator('level');
         $factory->registerDecorator('dummy', \Phlib\Logger\Decorator\LevelFilter::class);
-        $logger  = $factory->createLogger('test', [
-            'type'   => 'stream',
+        $logger = $factory->createLogger('test', [
+            'type' => 'stream',
             'dummy' => LogLevel::ERROR,
-            'path'  => $fh
+            'path' => $fh,
         ]);
 
         static::assertInstanceOf(\Phlib\Logger\Decorator\LevelFilter::class, $logger);
@@ -206,9 +209,9 @@ class FactoryTest extends TestCase
         $factory = new Factory();
         $factory->registerDecorator('dummy', '\Phlib\Logger\not\a\class');
         $factory->createLogger('test', [
-            'type'  => 'stream',
+            'type' => 'stream',
             'dummy' => true,
-            'path'  => $fh
+            'path' => $fh,
         ]);
     }
 
@@ -221,10 +224,10 @@ class FactoryTest extends TestCase
 
         $factory = new Factory();
         $factory->registerDecorator('dummy', \Phlib\Logger\Config::class);
-        $logger  = $factory->createLogger('test', [
-            'type'  => 'stream',
+        $logger = $factory->createLogger('test', [
+            'type' => 'stream',
             'dummy' => true,
-            'path'  => $fh
+            'path' => $fh,
         ]);
     }
 
@@ -234,7 +237,9 @@ class FactoryTest extends TestCase
         $this->expectExceptionMessage('Logger config missing logger type');
 
         $factory = new Factory();
-        $factory->createLogger('test', [ 'path' => 'filename' ]);
+        $factory->createLogger('test', [
+            'path' => 'filename',
+        ]);
     }
 
     public function testCreateLoggerInvalidLogger()
@@ -243,6 +248,9 @@ class FactoryTest extends TestCase
         $this->expectExceptionMessage('Cannot find a logger type named');
 
         $factory = new Factory();
-        $factory->createLogger('test', [ 'type' => 'unknown', 'path' => '(filename)' ]);
+        $factory->createLogger('test', [
+            'type' => 'unknown',
+            'path' => '(filename)',
+        ]);
     }
 }

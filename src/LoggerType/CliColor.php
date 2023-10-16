@@ -23,7 +23,6 @@ class CliColor extends Stream
 
     /**
      * @see Stream::__construct()
-     * @param string $name
      * @param resource|string $stream Optional. Default to Standard Error
      */
     public function __construct(string $name, $stream = STDERR)
@@ -31,22 +30,20 @@ class CliColor extends Stream
         parent::__construct($name, $stream);
 
         $this->formatter = new OutputFormatter(true, [
-            'debug'     => new OutputFormatterStyle(),
-            'info'      => new OutputFormatterStyle('blue'),
-            'notice'    => new OutputFormatterStyle('green'),
-            'warning'   => new OutputFormatterStyle('yellow'),
-            'error'     => new OutputFormatterStyle('red'),
-            'critical'  => new OutputFormatterStyle('red', 'yellow'),
-            'alert'     => new OutputFormatterStyle('white', 'red', ['bold']),
-            'emergency' => new OutputFormatterStyle('white', 'red', ['bold', 'underscore'])
+            'debug' => new OutputFormatterStyle(),
+            'info' => new OutputFormatterStyle('blue'),
+            'notice' => new OutputFormatterStyle('green'),
+            'warning' => new OutputFormatterStyle('yellow'),
+            'error' => new OutputFormatterStyle('red'),
+            'critical' => new OutputFormatterStyle('red', 'yellow'),
+            'alert' => new OutputFormatterStyle('white', 'red', ['bold']),
+            'emergency' => new OutputFormatterStyle('white', 'red', ['bold', 'underscore']),
         ]);
     }
 
     /**
      * @see Stream::getMessageFormat()
      * @param mixed $level
-     * @param array $context
-     * @return string
      */
     protected function getMessageFormat($level, array $context = []): string
     {

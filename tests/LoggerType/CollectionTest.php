@@ -17,7 +17,6 @@ class CollectionTest extends TestCase
         static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $logger);
     }
 
-
     public function testLog()
     {
         $logger = new Collection();

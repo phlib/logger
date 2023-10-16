@@ -13,7 +13,6 @@ use Psr\Log\LoggerInterface;
  */
 class Collection extends AbstractLogger
 {
-
     /**
      * @var \SplObjectStorage
      */

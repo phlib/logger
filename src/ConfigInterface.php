@@ -10,6 +10,5 @@ namespace Phlib\Logger;
  */
 interface ConfigInterface
 {
-
     public function getLoggerConfig(string $name): array;
 }

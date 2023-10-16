@@ -26,8 +26,8 @@ class Config implements ConfigInterface
 
         if (!isset($loggerConfig['type'])) {
             $loggerConfig = [
-                'type'    => 'collection',
-                'loggers' => $loggerConfig
+                'type' => 'collection',
+                'loggers' => $loggerConfig,
             ];
         }
 

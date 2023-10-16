@@ -33,7 +33,6 @@ class Stream extends AbstractLogger
     private $dateFormat = 'Y-m-d H:i:s';
 
     /**
-     * @param string $name
      * @param resource|string $stream
      */
     public function __construct(string $name, $stream)
@@ -62,8 +61,6 @@ class Stream extends AbstractLogger
      * This method can be overridden by extending classes to modify the behaviour
      *
      * @param mixed $level
-     * @param array $context
-     * @return string
      */
     protected function getMessageFormat($level, array $context = []): string
     {
@@ -85,10 +82,10 @@ class Stream extends AbstractLogger
     {
         $meta = [
             'datetime' => date($this->dateFormat),
-            'name'     => $this->name,
-            'level'    => $level,
-            'message'  => $this->formatMessage((string)$message, $context),
-            'context'  => $this->formatContext($context)
+            'name' => $this->name,
+            'level' => $level,
+            'message' => $this->formatMessage((string)$message, $context),
+            'context' => $this->formatContext($context),
         ];
 
         $message = static::interpolate($this->getMessageFormat($level, $context), $meta);
@@ -123,8 +120,6 @@ class Stream extends AbstractLogger
      * trying to ensure no error, warning or notice is happening
      *
      * @param mixed $message
-     * @param array $context
-     * @return string
      */
     private static function interpolate($message, array $context): string
     {
@@ -144,16 +139,14 @@ class Stream extends AbstractLogger
      * Converts a context value into its appropriate string representation
      *
      * @param mixed $val
-     * @return string
      */
     private static function contextValueToString($val): string
     {
-
         if (is_bool($val)) {
             return var_export($val, true);
         } elseif (is_scalar($val)) {
             return (string)$val;
-        } elseif (is_null($val)) {
+        } elseif ($val === null) {
             return 'NULL';
         } elseif (is_object($val)) {
             if (is_callable([$val, '__toString'])) {

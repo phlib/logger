@@ -25,7 +25,6 @@ abstract class AbstractDecorator extends AbstractLogger
      * If the concrete requires use of the config value, override the constructor
      * to add validation and store for re-use
      *
-     * @param LoggerInterface $logger
      * @param mixed $config
      */
     public function __construct(LoggerInterface $logger, $config)

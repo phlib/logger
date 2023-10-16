@@ -10,7 +10,6 @@ use Psr\Log\LogLevel;
 
 class StreamTest extends TestCase
 {
-
     public function testIsPsrLog()
     {
         $resource = fopen('php://memory', 'a');
@@ -85,7 +84,7 @@ class StreamTest extends TestCase
             'field1' => 'Test Field 1',
             'field2' => 'Test Field 2',
             'field3' => 'Test Field 3',
-            'exception' => $contextException
+            'exception' => $contextException,
         ];
 
         $stream->setMessageFormat('{context}');
@@ -132,7 +131,7 @@ class StreamTest extends TestCase
         $stream->setMessageFormat('{message}');
 
         $stream->log(LogLevel::ALERT, '{myvalue}', [
-            'myvalue' => true
+            'myvalue' => true,
         ]);
 
         rewind($resource);
@@ -149,7 +148,7 @@ class StreamTest extends TestCase
         $stream->setMessageFormat('{message}');
 
         $stream->log(LogLevel::ALERT, '{myvalue}', [
-            'myvalue' => 'value'
+            'myvalue' => 'value',
         ]);
 
         rewind($resource);
@@ -166,7 +165,7 @@ class StreamTest extends TestCase
         $stream->setMessageFormat('{message}');
 
         $stream->log(LogLevel::ALERT, '{myvalue}', [
-            'myvalue' => null
+            'myvalue' => null,
         ]);
 
         rewind($resource);
@@ -185,7 +184,7 @@ class StreamTest extends TestCase
         $object = new \stdClass();
 
         $stream->log(LogLevel::ALERT, '{myvalue}', [
-            'myvalue' => $object
+            'myvalue' => $object,
         ]);
 
         rewind($resource);
@@ -202,7 +201,7 @@ class StreamTest extends TestCase
         $stream->setMessageFormat('{message}');
 
         $stream->log(LogLevel::ALERT, '{myvalue}', [
-            'myvalue' => []
+            'myvalue' => [],
         ]);
 
         rewind($resource);

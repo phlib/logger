@@ -17,23 +17,20 @@ class Factory
      */
     private $decorators = [
         'defaultContext' => \Phlib\Logger\Decorator\DefaultContext::class,
-        'level' => \Phlib\Logger\Decorator\LevelFilter::class
+        'level' => \Phlib\Logger\Decorator\LevelFilter::class,
     ];
 
     /**
      * Register a new decorator class
      *
      * Class must implement DecoratorInterface
-     *
-     * @param string $configKey
-     * @param string $className
      */
     public function registerDecorator(string $configKey, string $className): void
     {
         if (isset($this->decorators[$configKey])) {
             throw new \RuntimeException('Decorator key already in use: ' . $configKey);
         }
-        if (in_array($className, $this->decorators)) {
+        if (in_array($className, $this->decorators, true)) {
             throw new \RuntimeException('Decorator class already registered: ' . $className);
         }
         $this->decorators[$configKey] = $className;
@@ -60,7 +57,7 @@ class Factory
         if (!method_exists($this, $methodName)) {
             throw new \DomainException(sprintf('Cannot find a logger type named "%s"', $type));
         }
-        $logger = $this->$methodName($name, $config);
+        $logger = $this->{$methodName}($name, $config);
 
         $logger = $this->applyDecorators($logger, $config);
 
@@ -114,7 +111,7 @@ class Factory
         $host = $config['host'] ?? false;
         $port = $config['port'] ?? 12201;
 
-        $transport        = new \Gelf\Transport\UdpTransport($host, $port);
+        $transport = new \Gelf\Transport\UdpTransport($host, $port);
         $messagePublisher = new \Gelf\Publisher($transport);
 
         return new \Gelf\Logger($messagePublisher, $name);

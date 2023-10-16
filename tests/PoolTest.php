@@ -10,22 +10,21 @@ use Psr\Log\LogLevel;
 
 class PoolTest extends TestCase
 {
-
     public function testGetLogger()
     {
         $loggerConfig = [
-            'type'    => 'collection',
-            'loggers' => []
+            'type' => 'collection',
+            'loggers' => [],
         ];
 
-        $config  = $this->createMock(\Phlib\Logger\Config::class);
+        $config = $this->createMock(\Phlib\Logger\Config::class);
         $config->expects(static::once())
             ->method('getLoggerConfig')
             ->with(static::equalTo('test'))
             ->will(static::returnValue($loggerConfig));
 
         $factory = $this->createMock(\Phlib\Logger\Factory::class);
-        $logger  = $this->createMock(\Phlib\Logger\LoggerType\Collection::class);
+        $logger = $this->createMock(\Phlib\Logger\LoggerType\Collection::class);
         $factory->expects(static::once())
             ->method('createLogger')
             ->with(static::equalTo('test'), static::equalTo($loggerConfig))
@@ -40,17 +39,17 @@ class PoolTest extends TestCase
     {
         $loggerConfig = [
             'type' => 'stream',
-            'path' => '(filename)'
+            'path' => '(filename)',
         ];
 
-        $config  = $this->createMock(\Phlib\Logger\Config::class);
+        $config = $this->createMock(\Phlib\Logger\Config::class);
         $config->expects(static::once())
             ->method('getLoggerConfig')
             ->with(static::equalTo('test'))
             ->will(static::returnValue($loggerConfig));
 
         $factory = $this->createMock(\Phlib\Logger\Factory::class);
-        $logger  = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
+        $logger = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
         $factory->expects(static::once())
             ->method('createLogger')
             ->with(static::equalTo('test'), static::equalTo($loggerConfig))
@@ -70,19 +69,19 @@ class PoolTest extends TestCase
         $prefix = 'logger-prefix-';
 
         $loggerConfig = [
-            'type'  => 'stream',
+            'type' => 'stream',
             'level' => LogLevel::CRITICAL,
-            'path'  => '(filename)'
+            'path' => '(filename)',
         ];
 
-        $config  = $this->createMock(\Phlib\Logger\Config::class);
+        $config = $this->createMock(\Phlib\Logger\Config::class);
         $config->expects(static::once())
             ->method('getLoggerConfig')
             ->with(static::equalTo('test'))
             ->will(static::returnValue($loggerConfig));
 
         $factory = $this->createMock(\Phlib\Logger\Factory::class);
-        $logger  = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
+        $logger = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
         $factory->expects(static::once())
             ->method('createLogger')
             ->with(static::equalTo($prefix . 'test'))
@@ -97,19 +96,19 @@ class PoolTest extends TestCase
     public function testGetLoggerCollection()
     {
         $loggerConfig = [
-            'type'  => 'stream',
+            'type' => 'stream',
             'level' => LogLevel::WARNING,
-            'path'  => '(filename)'
+            'path' => '(filename)',
         ];
 
-        $config  = $this->createMock(\Phlib\Logger\Config::class);
+        $config = $this->createMock(\Phlib\Logger\Config::class);
         $config->expects(static::once())
             ->method('getLoggerConfig')
             ->with(static::equalTo('test'))
             ->will(static::returnValue($loggerConfig));
 
-        $factory          = $this->createMock(\Phlib\Logger\Factory::class);
-        $streamLogger     = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
+        $factory = $this->createMock(\Phlib\Logger\Factory::class);
+        $streamLogger = $this->createMock(\Phlib\Logger\LoggerType\Stream::class);
         $collectionLogger = $this->createMock(\Phlib\Logger\LoggerType\Collection::class);
         $factory->expects(static::once())
             ->method('createLogger')
@@ -123,7 +122,7 @@ class PoolTest extends TestCase
             ->with(
                 static::equalTo('test'),
                 static::equalTo([
-                    'loggers' => [$streamLogger]
+                    'loggers' => [$streamLogger],
                 ])
             )
             ->will(static::returnValue($collectionLogger));

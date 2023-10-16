@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Phlib\Logger\Decorator;
 
-use Psr\Log\LogLevel;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 /**
  * Class LevelFilter
@@ -17,7 +17,7 @@ class LevelFilter extends AbstractDecorator
     /**
      * Logging levels from syslog protocol defined in RFC 5424
      *
-     * @var string[] $levels Logging levels
+     * @var string[] Logging levels
      */
     private static $levels = [
         LogLevel::EMERGENCY, // 0
@@ -27,7 +27,7 @@ class LevelFilter extends AbstractDecorator
         LogLevel::WARNING,   // 4
         LogLevel::NOTICE,    // 5
         LogLevel::INFO,      // 6
-        LogLevel::DEBUG      // 7
+        LogLevel::DEBUG,     // 7
     ];
 
     /**

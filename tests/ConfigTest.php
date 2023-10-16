@@ -5,21 +5,19 @@ declare(strict_types=1);
 namespace Phlib\Logger\Test;
 
 use Phlib\Logger\Config;
-use Phlib\Logger\Factory;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 
 class ConfigTest extends TestCase
 {
-
     public function testEmptyConfig()
     {
         $configArray = [];
         $config = new Config($configArray);
 
         $expected = [
-            'type'    => 'collection',
-            'loggers' => []
+            'type' => 'collection',
+            'loggers' => [],
         ];
 
         static::assertEquals($expected, $config->getLoggerConfig('test'));
@@ -29,11 +27,11 @@ class ConfigTest extends TestCase
     {
         $streamConfig = [
             'type' => 'stream',
-            'path' => '(filename)'
+            'path' => '(filename)',
         ];
 
         $configArray = [
-            'test' => $streamConfig
+            'test' => $streamConfig,
         ];
 
         $config = new Config($configArray);
@@ -49,17 +47,17 @@ class ConfigTest extends TestCase
 
         $configArray = [
             'test' => [
-                $gelfConfig
-            ]
+                $gelfConfig,
+            ],
         ];
 
         $config = new Config($configArray);
 
         $expected = [
-            'type'    => 'collection',
+            'type' => 'collection',
             'loggers' => [
-                $gelfConfig
-            ]
+                $gelfConfig,
+            ],
         ];
 
         static::assertEquals($expected, $config->getLoggerConfig('test'));
@@ -68,15 +66,15 @@ class ConfigTest extends TestCase
     public function testAlias()
     {
         $streamConfig = [
-            'type'  => 'stream',
+            'type' => 'stream',
             'level' => LogLevel::CRITICAL,
-            'path'  => '(filename)'
+            'path' => '(filename)',
         ];
 
         $configArray = [
-            'test'  => 'test1',
+            'test' => 'test1',
             'test1' => 'test2',
-            'test2' => $streamConfig
+            'test2' => $streamConfig,
         ];
 
         $config = new Config($configArray);
@@ -87,14 +85,14 @@ class ConfigTest extends TestCase
     public function testInvalidLoggerConfigType()
     {
         $configArray = [
-            'test' => false
+            'test' => false,
         ];
 
         $config = new Config($configArray);
 
         $expected = [
-            'type'    => 'collection',
-            'loggers' => []
+            'type' => 'collection',
+            'loggers' => [],
         ];
 
         static::assertEquals($expected, $config->getLoggerConfig('test'));

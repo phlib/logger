@@ -43,43 +43,43 @@ class DefaultContextTest extends TestCase
             [
                 [
                     'hello' => 'world',
-                    'foo' => 'bar'
+                    'foo' => 'bar',
                 ],
                 [],
                 [
                     'hello' => 'world',
-                    'foo' => 'bar'
-                ]
+                    'foo' => 'bar',
+                ],
             ],
             // Defaults, add other log context
             [
                 [
-                    'hello' => 'world'
+                    'hello' => 'world',
                 ],
                 [
-                    'foo' => 'bar'
+                    'foo' => 'bar',
                 ],
                 [
                     'hello' => 'world',
-                    'foo' => 'bar'
-                ]
+                    'foo' => 'bar',
+                ],
             ],
             // Overwrite defaults with log context
             [
                 [
                     'hello' => 'world',
-                    'foo' => 'bar'
+                    'foo' => 'bar',
                 ],
                 [
                     'hello' => 'new world',
-                    'test' => 'abc123'
+                    'test' => 'abc123',
                 ],
                 [
                     'hello' => 'new world',
                     'foo' => 'bar',
-                    'test' => 'abc123'
-                ]
-            ]
+                    'test' => 'abc123',
+                ],
+            ],
         ];
     }
 

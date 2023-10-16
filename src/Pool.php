@@ -13,7 +13,6 @@ use Psr\Log\LoggerInterface;
  */
 class Pool
 {
-
     /**
      * @var ConfigInterface
      */
@@ -36,7 +35,7 @@ class Pool
 
     public function __construct(ConfigInterface $config, Factory $loggerFactory)
     {
-        $this->config        = $config;
+        $this->config = $config;
         $this->loggerFactory = $loggerFactory;
     }
 
@@ -65,7 +64,7 @@ class Pool
 
         if (!$logger instanceof Collection) {
             $logger = $this->loggerFactory->createCollectionLogger($name, [
-                'loggers' => [$logger]
+                'loggers' => [$logger],
             ]);
         }
 
