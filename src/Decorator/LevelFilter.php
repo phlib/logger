@@ -9,7 +9,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
 /**
- * Class LevelFilter
  * @package Phlib\Logger
  */
 class LevelFilter extends AbstractDecorator

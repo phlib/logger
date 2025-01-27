@@ -8,7 +8,6 @@ use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class Collection
  * @package Phlib\Logger
  */
 class Collection extends AbstractLogger

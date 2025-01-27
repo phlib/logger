@@ -7,7 +7,6 @@ namespace Phlib\Logger;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class Factory
  * @package Phlib\Logger
  */
 class Factory

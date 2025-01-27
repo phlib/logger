@@ -7,7 +7,6 @@ namespace Phlib\Logger\LoggerType;
 use Psr\Log\AbstractLogger;
 
 /**
- * Class Stream
  * @package Phlib\Logger
  */
 class Stream extends AbstractLogger

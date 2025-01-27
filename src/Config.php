@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phlib\Logger;
 
 /**
- * Class Config
  * @package Phlib\Logger
  */
 class Config implements ConfigInterface

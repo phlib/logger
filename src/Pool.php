@@ -8,7 +8,6 @@ use Phlib\Logger\LoggerType\Collection;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class Pool
  * @package Phlib\Logger
  */
 class Pool

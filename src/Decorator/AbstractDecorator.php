@@ -18,8 +18,6 @@ abstract class AbstractDecorator extends AbstractLogger
     private $logger;
 
     /**
-     * AbstractDecorator constructor
-     *
      * Stores the Logger for re-use in the concrete via getInnerLogger()
      *
      * If the concrete requires use of the config value, override the constructor

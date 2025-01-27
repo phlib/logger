@@ -8,8 +8,6 @@ use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 /**
- * Class CliColor
- *
  * Write to CLI with colour!
  *
  * @package Phlib\Logger
