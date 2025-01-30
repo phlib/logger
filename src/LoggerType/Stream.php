@@ -151,7 +151,7 @@ class Stream extends AbstractLogger
             if (is_callable([$val, '__toString'])) {
                 return (string)$val;
             }
-            return get_class($val);
+            return $val::class;
         }
         return gettype($val);
     }
