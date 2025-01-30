@@ -26,10 +26,19 @@ class LevelFilterTest extends TestCase
         // and to ignore the WARNING log message
         $loggerInterface->expects(static::exactly(2))
             ->method('log')
-            ->withConsecutive(
-                [LogLevel::ERROR],
-                [LogLevel::CRITICAL]
-            );
+            ->with(static::callback(function (string $level): bool {
+                static $invocationCount = 0;
+                $invocationCount++;
+
+                match ($invocationCount) {
+                    1 => static::assertSame(LogLevel::ERROR, $level),
+                    2 => static::assertSame(LogLevel::CRITICAL, $level),
+                    default => static::fail('Method called more times than expected'),
+                };
+
+                return true;
+            }));
+
 
         $levelFilter = new LevelFilter($loggerInterface, LogLevel::ERROR);
 

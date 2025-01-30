@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phlib\Logger\Test\Decorator;
 
 use Phlib\Logger\Decorator\DefaultContext;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -17,9 +18,7 @@ class DefaultContextTest extends TestCase
         static::assertInstanceOf(LoggerInterface::class, $decorator);
     }
 
-    /**
-     * @dataProvider providerAddDefaultContext
-     */
+    #[DataProvider('providerAddDefaultContext')]
     public function testAddDefaultContext(array $defaultContext, array $logContext, array $expected): void
     {
         $loggerInterface = $this->getMockLogger();
@@ -36,7 +35,7 @@ class DefaultContextTest extends TestCase
         $decorator->info('message', $logContext);
     }
 
-    public function providerAddDefaultContext(): array
+    public static function providerAddDefaultContext(): array
     {
         return [
             // Defaults, no log context
