@@ -11,25 +11,16 @@ use Psr\Log\AbstractLogger;
  */
 class Stream extends AbstractLogger
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private readonly string $name;
 
     /**
      * @var resource
      */
     private $stream;
 
-    /**
-     * @var string
-     */
-    private $messageFormat = '[{datetime}] {name}.{level}: {message} {context}';
+    private string $messageFormat = '[{datetime}] {name}.{level}: {message} {context}';
 
-    /**
-     * @var string
-     */
-    private $dateFormat = 'Y-m-d H:i:s';
+    private string $dateFormat = 'Y-m-d H:i:s';
 
     /**
      * @param resource|string $stream
@@ -58,10 +49,8 @@ class Stream extends AbstractLogger
      * Get current message format
      *
      * This method can be overridden by extending classes to modify the behaviour
-     *
-     * @param mixed $level
      */
-    protected function getMessageFormat($level, array $context = []): string
+    protected function getMessageFormat(mixed $level, array $context = []): string
     {
         return $this->messageFormat;
     }
@@ -73,11 +62,7 @@ class Stream extends AbstractLogger
         return $this;
     }
 
-    /**
-     * @param mixed $level
-     * @param string|\Stringable $message
-     */
-    public function log($level, $message, array $context = []): void
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
         $meta = [
             'datetime' => date($this->dateFormat),
@@ -117,10 +102,8 @@ class Stream extends AbstractLogger
      *
      * Expanded on reference implementation to include handling for complex types,
      * trying to ensure no error, warning or notice is happening
-     *
-     * @param mixed $message
      */
-    private static function interpolate($message, array $context): string
+    private static function interpolate(string $message, array $context): string
     {
         // build a replacement array with braces around the context keys
         $replace = [];

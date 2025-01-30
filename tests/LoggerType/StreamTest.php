@@ -10,7 +10,7 @@ use Psr\Log\LogLevel;
 
 class StreamTest extends TestCase
 {
-    public function testIsPsrLog()
+    public function testIsPsrLog(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -18,7 +18,7 @@ class StreamTest extends TestCase
         static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $stream);
     }
 
-    public function testLog()
+    public function testLog(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -31,7 +31,7 @@ class StreamTest extends TestCase
         static::assertStringContainsString($message, $logMessage);
     }
 
-    public function testMessageFormatName()
+    public function testMessageFormatName(): void
     {
         $streamName = 'myTestStreamLogger';
         $resource = fopen('php://memory', 'a');
@@ -46,7 +46,7 @@ class StreamTest extends TestCase
         static::assertEquals($streamName . PHP_EOL, $logMessage);
     }
 
-    public function testMessageFormatLevel()
+    public function testMessageFormatLevel(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -60,7 +60,7 @@ class StreamTest extends TestCase
         static::assertEquals($level . PHP_EOL, $logMessage);
     }
 
-    public function testMessageFormatMessage()
+    public function testMessageFormatMessage(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -74,7 +74,7 @@ class StreamTest extends TestCase
         static::assertEquals($message . PHP_EOL, $logMessage);
     }
 
-    public function testMessageFormatContext()
+    public function testMessageFormatContext(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -99,7 +99,7 @@ class StreamTest extends TestCase
         static::assertEquals($contextString . PHP_EOL, $logMessage);
     }
 
-    public function testNewDateFormat()
+    public function testNewDateFormat(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -115,7 +115,7 @@ class StreamTest extends TestCase
         static::assertStringMatchesFormat('%d/%d/%d' . PHP_EOL, $logMessage);
     }
 
-    public function testStringCannotOpenException()
+    public function testStringCannotOpenException(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Unable to open');
@@ -123,7 +123,7 @@ class StreamTest extends TestCase
         new Stream('name', __DIR__ . '/path/what/does/not/exist');
     }
 
-    public function testFormatContextBoolean()
+    public function testFormatContextBoolean(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -140,7 +140,7 @@ class StreamTest extends TestCase
         static::assertEquals('true' . PHP_EOL, $logMessage);
     }
 
-    public function testFormatContextString()
+    public function testFormatContextString(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -157,7 +157,7 @@ class StreamTest extends TestCase
         static::assertEquals('value' . PHP_EOL, $logMessage);
     }
 
-    public function testFormatContextNull()
+    public function testFormatContextNull(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -174,7 +174,7 @@ class StreamTest extends TestCase
         static::assertEquals('NULL' . PHP_EOL, $logMessage);
     }
 
-    public function testFormatContextClass()
+    public function testFormatContextClass(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);
@@ -193,7 +193,7 @@ class StreamTest extends TestCase
         static::assertEquals(\stdClass::class . PHP_EOL, $logMessage);
     }
 
-    public function testFormatContextRawType()
+    public function testFormatContextRawType(): void
     {
         $resource = fopen('php://memory', 'a');
         $stream = new Stream('name', $resource);

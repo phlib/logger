@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace Phlib\Logger\Test\LoggerType;
 
 use Phlib\Logger\LoggerType\Collection;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
 class CollectionTest extends TestCase
 {
-    public function testIsPsrLog()
+    public function testIsPsrLog(): void
     {
         $logger = new Collection();
         static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $logger);
     }
 
-    public function testLog()
+    public function testLog(): void
     {
         $logger = new Collection();
 
@@ -44,10 +45,7 @@ class CollectionTest extends TestCase
         $logger->log(LogLevel::ERROR, 'Test Log Message');
     }
 
-    /**
-     * @return LoggerInterface
-     */
-    protected function getMockLoggerInterface()
+    protected function getMockLoggerInterface(): LoggerInterface&MockObject
     {
         $loggerInterface = $this->createMock(\Psr\Log\LoggerInterface::class);
         return $loggerInterface;

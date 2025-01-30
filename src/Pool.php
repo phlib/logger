@@ -12,30 +12,17 @@ use Psr\Log\LoggerInterface;
  */
 class Pool
 {
-    /**
-     * @var ConfigInterface
-     */
-    protected $config;
-
-    /**
-     * @var string
-     */
-    protected $prefix = '';
+    protected string $prefix = '';
 
     /**
      * @var LoggerInterface[]
      */
-    protected $loggerInstances = [];
+    protected array $loggerInstances = [];
 
-    /**
-     * @var Factory
-     */
-    protected $loggerFactory;
-
-    public function __construct(ConfigInterface $config, Factory $loggerFactory)
-    {
-        $this->config = $config;
-        $this->loggerFactory = $loggerFactory;
+    public function __construct(
+        protected ConfigInterface $config,
+        protected Factory $loggerFactory,
+    ) {
     }
 
     public function setPrefix(string $prefix): self

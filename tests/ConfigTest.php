@@ -10,7 +10,7 @@ use Psr\Log\LogLevel;
 
 class ConfigTest extends TestCase
 {
-    public function testEmptyConfig()
+    public function testEmptyConfig(): void
     {
         $configArray = [];
         $config = new Config($configArray);
@@ -23,7 +23,7 @@ class ConfigTest extends TestCase
         static::assertEquals($expected, $config->getLoggerConfig('test'));
     }
 
-    public function testStream()
+    public function testStream(): void
     {
         $streamConfig = [
             'type' => 'stream',
@@ -39,7 +39,7 @@ class ConfigTest extends TestCase
         static::assertEquals($streamConfig, $config->getLoggerConfig('test'));
     }
 
-    public function testCollectionCoerce()
+    public function testCollectionCoerce(): void
     {
         $gelfConfig = [
             'type' => 'gelf',
@@ -63,7 +63,7 @@ class ConfigTest extends TestCase
         static::assertEquals($expected, $config->getLoggerConfig('test'));
     }
 
-    public function testAlias()
+    public function testAlias(): void
     {
         $streamConfig = [
             'type' => 'stream',
@@ -82,7 +82,7 @@ class ConfigTest extends TestCase
         static::assertEquals($streamConfig, $config->getLoggerConfig('test'));
     }
 
-    public function testInvalidLoggerConfigType()
+    public function testInvalidLoggerConfigType(): void
     {
         $configArray = [
             'test' => false,

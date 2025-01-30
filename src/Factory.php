@@ -11,10 +11,7 @@ use Psr\Log\LoggerInterface;
  */
 class Factory
 {
-    /**
-     * @var array
-     */
-    private $decorators = [
+    private array $decorators = [
         'defaultContext' => \Phlib\Logger\Decorator\DefaultContext::class,
         'level' => \Phlib\Logger\Decorator\LevelFilter::class,
     ];

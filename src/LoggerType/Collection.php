@@ -12,10 +12,7 @@ use Psr\Log\LoggerInterface;
  */
 class Collection extends AbstractLogger
 {
-    /**
-     * @var \SplObjectStorage
-     */
-    protected $loggerInstances;
+    protected \SplObjectStorage $loggerInstances;
 
     public function __construct()
     {

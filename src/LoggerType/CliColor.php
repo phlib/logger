@@ -14,10 +14,7 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  */
 class CliColor extends Stream
 {
-    /**
-     * @var OutputFormatter
-     */
-    private $formatter;
+    private readonly OutputFormatter $formatter;
 
     /**
      * @see Stream::__construct()
@@ -39,11 +36,7 @@ class CliColor extends Stream
         ]);
     }
 
-    /**
-     * @see Stream::getMessageFormat()
-     * @param mixed $level
-     */
-    protected function getMessageFormat($level, array $context = []): string
+    protected function getMessageFormat(mixed $level, array $context = []): string
     {
         $parentFormat = parent::getMessageFormat($level, $context);
         $consoleFormat = "<{$level}>{$parentFormat}</{$level}>";

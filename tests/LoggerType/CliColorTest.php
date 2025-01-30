@@ -10,7 +10,7 @@ use Psr\Log\LogLevel;
 
 class CliColorTest extends TestCase
 {
-    public function testLogDebug()
+    public function testLogDebug(): void
     {
         $resource = fopen('php://memory', 'a');
         $logger = new CliColor('name', $resource);
@@ -24,7 +24,7 @@ class CliColorTest extends TestCase
         static::assertStringContainsString($message, $logMessage);
     }
 
-    public function testLogInfo()
+    public function testLogInfo(): void
     {
         $resource = fopen('php://memory', 'a');
         $logger = new CliColor('name', $resource);
@@ -39,7 +39,7 @@ class CliColorTest extends TestCase
         static::assertStringEndsWith("\033[39m\n", $logMessage);
     }
 
-    public function testLogNotice()
+    public function testLogNotice(): void
     {
         $resource = fopen('php://memory', 'a');
         $logger = new CliColor('name', $resource);
@@ -54,7 +54,7 @@ class CliColorTest extends TestCase
         static::assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
-    public function testLogWarning()
+    public function testLogWarning(): void
     {
         $resource = fopen('php://memory', 'a');
         $logger = new CliColor('name', $resource);
@@ -69,7 +69,7 @@ class CliColorTest extends TestCase
         static::assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
-    public function testLogError()
+    public function testLogError(): void
     {
         $resource = fopen('php://memory', 'a');
         $logger = new CliColor('name', $resource);
@@ -84,7 +84,7 @@ class CliColorTest extends TestCase
         static::assertStringEndsWith("\033[39m" . PHP_EOL, $logMessage);
     }
 
-    public function testLogCritical()
+    public function testLogCritical(): void
     {
         $resource = fopen('php://memory', 'a');
         $logger = new CliColor('name', $resource);
@@ -99,7 +99,7 @@ class CliColorTest extends TestCase
         static::assertStringEndsWith("\033[39;49m" . PHP_EOL, $logMessage);
     }
 
-    public function testLogAlert()
+    public function testLogAlert(): void
     {
         $resource = fopen('php://memory', 'a');
         $logger = new CliColor('name', $resource);
@@ -114,7 +114,7 @@ class CliColorTest extends TestCase
         static::assertStringEndsWith("\033[39;49;22m" . PHP_EOL, $logMessage);
     }
 
-    public function testLogEmergency()
+    public function testLogEmergency(): void
     {
         $resource = fopen('php://memory', 'a');
         $logger = new CliColor('name', $resource);

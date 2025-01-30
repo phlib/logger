@@ -10,7 +10,7 @@ use Psr\Log\LogLevel;
 
 class PoolTest extends TestCase
 {
-    public function testGetLogger()
+    public function testGetLogger(): void
     {
         $loggerConfig = [
             'type' => 'collection',
@@ -35,7 +35,7 @@ class PoolTest extends TestCase
         static::assertSame($logger, $pool->test);
     }
 
-    public function testGetLoggerAgain()
+    public function testGetLoggerAgain(): void
     {
         $loggerConfig = [
             'type' => 'stream',
@@ -64,7 +64,7 @@ class PoolTest extends TestCase
         static::assertSame($actualLogger, $pool->test);
     }
 
-    public function testPrefix()
+    public function testPrefix(): void
     {
         $prefix = 'logger-prefix-';
 
@@ -93,7 +93,7 @@ class PoolTest extends TestCase
         static::assertSame($logger, $pool->test);
     }
 
-    public function testGetLoggerCollection()
+    public function testGetLoggerCollection(): void
     {
         $loggerConfig = [
             'type' => 'stream',
