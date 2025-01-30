@@ -224,7 +224,7 @@ class FactoryTest extends TestCase
 
         $factory = new Factory();
         $factory->registerDecorator('dummy', \Phlib\Logger\Config::class);
-        $logger = $factory->createLogger('test', [
+        $factory->createLogger('test', [
             'type' => 'stream',
             'dummy' => true,
             'path' => $fh,

@@ -80,9 +80,8 @@ class Stream extends AbstractLogger
     protected function formatMessage(string $message, array $context): string
     {
         $message = static::interpolate($message, $context);
-        $message = trim(str_replace(["\r", "\n"], ' ', $message));
 
-        return $message;
+        return trim(str_replace(["\r", "\n"], ' ', $message));
     }
 
     protected function formatContext(array $context): string

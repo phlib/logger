@@ -55,9 +55,7 @@ class Factory
         }
         $logger = $this->{$methodName}($name, $config);
 
-        $logger = $this->applyDecorators($logger, $config);
-
-        return $logger;
+        return $this->applyDecorators($logger, $config);
     }
 
     private function applyDecorators(LoggerInterface $logger, array $config): LoggerInterface

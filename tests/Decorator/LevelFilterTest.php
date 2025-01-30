@@ -15,7 +15,7 @@ class LevelFilterTest extends TestCase
     public function testIsPsrLog(): void
     {
         $levelFilter = new LevelFilter($this->getMockLoggerInterface(), LogLevel::DEBUG);
-        static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $levelFilter);
+        static::assertInstanceOf(LoggerInterface::class, $levelFilter);
     }
 
     public function testLog(): void
@@ -48,7 +48,7 @@ class LevelFilterTest extends TestCase
         // We expect an exception to be thrown when specifying an invalid logging level in the constructor
         $this->expectException(\Psr\Log\InvalidArgumentException::class);
 
-        $levelFilter = new LevelFilter($this->getMockLoggerInterface(), 'InvalidLogLevel');
+        new LevelFilter($this->getMockLoggerInterface(), 'InvalidLogLevel');
     }
 
     public function testInvalidLogLogLevel(): void
@@ -62,7 +62,6 @@ class LevelFilterTest extends TestCase
 
     private function getMockLoggerInterface(): LoggerInterface&MockObject
     {
-        $loggerInterface = $this->createMock(\Psr\Log\LoggerInterface::class);
-        return $loggerInterface;
+        return $this->createMock(LoggerInterface::class);
     }
 }
