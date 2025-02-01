@@ -13,21 +13,15 @@ use Psr\Log\LoggerInterface;
 abstract class AbstractDecorator extends AbstractLogger
 {
     /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * Stores the Logger for re-use in the concrete via getInnerLogger()
      *
      * If the concrete requires use of the config value, override the constructor
      * to add validation and store for re-use
-     *
-     * @param mixed $config
      */
-    public function __construct(LoggerInterface $logger, $config)
-    {
-        $this->logger = $logger;
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        mixed $config,
+    ) {
     }
 
     protected function getInnerLogger(): LoggerInterface

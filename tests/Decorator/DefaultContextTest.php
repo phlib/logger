@@ -5,22 +5,21 @@ declare(strict_types=1);
 namespace Phlib\Logger\Test\Decorator;
 
 use Phlib\Logger\Decorator\DefaultContext;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 class DefaultContextTest extends TestCase
 {
-    public function testIsPsrLog()
+    public function testIsPsrLog(): void
     {
         $decorator = new DefaultContext($this->getMockLogger(), []);
-        static::assertInstanceOf(\Psr\Log\LoggerInterface::class, $decorator);
+        static::assertInstanceOf(LoggerInterface::class, $decorator);
     }
 
-    /**
-     * @dataProvider providerAddDefaultContext
-     */
-    public function testAddDefaultContext($defaultContext, $logContext, $expected)
+    #[DataProvider('providerAddDefaultContext')]
+    public function testAddDefaultContext(array $defaultContext, array $logContext, array $expected): void
     {
         $loggerInterface = $this->getMockLogger();
 
@@ -36,7 +35,7 @@ class DefaultContextTest extends TestCase
         $decorator->info('message', $logContext);
     }
 
-    public function providerAddDefaultContext()
+    public static function providerAddDefaultContext(): array
     {
         return [
             // Defaults, no log context
@@ -83,12 +82,8 @@ class DefaultContextTest extends TestCase
         ];
     }
 
-    /**
-     * @return LoggerInterface|MockObject
-     */
-    protected function getMockLogger()
+    private function getMockLogger(): LoggerInterface&MockObject
     {
-        $loggerInterface = $this->createMock(\Psr\Log\LoggerInterface::class);
-        return $loggerInterface;
+        return $this->createMock(LoggerInterface::class);
     }
 }

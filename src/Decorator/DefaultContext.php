@@ -15,10 +15,7 @@ use Psr\Log\LoggerInterface;
  */
 class DefaultContext extends AbstractDecorator
 {
-    /**
-     * @var array
-     */
-    private $decorations;
+    private readonly array $decorations;
 
     public function __construct(LoggerInterface $logger, array $decorations)
     {

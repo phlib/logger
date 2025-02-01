@@ -9,14 +9,9 @@ namespace Phlib\Logger;
  */
 class Config implements ConfigInterface
 {
-    /**
-     * @var array
-     */
-    protected $config;
-
-    public function __construct(array $config)
-    {
-        $this->config = $config;
+    public function __construct(
+        protected array $config,
+    ) {
     }
 
     public function getLoggerConfig(string $name): array

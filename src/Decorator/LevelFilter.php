@@ -18,7 +18,7 @@ class LevelFilter extends AbstractDecorator
      *
      * @var string[] Logging levels
      */
-    private static $levels = [
+    private static array $levels = [
         LogLevel::EMERGENCY, // 0
         LogLevel::ALERT,     // 1
         LogLevel::CRITICAL,  // 2
@@ -29,17 +29,14 @@ class LevelFilter extends AbstractDecorator
         LogLevel::DEBUG,     // 7
     ];
 
-    /**
-     * @var int
-     */
-    private $logLevel;
+    private readonly int $logLevel;
 
     public function __construct(LoggerInterface $logger, string $level)
     {
         parent::__construct($logger, $level);
 
-        $this->logLevel = array_search($level, self::$levels, true);
-        if ($this->logLevel === false) {
+        $logLevel = array_search($level, self::$levels, true);
+        if ($logLevel === false) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Cannot use logging level "%s"',
@@ -47,6 +44,7 @@ class LevelFilter extends AbstractDecorator
                 )
             );
         }
+        $this->logLevel = $logLevel;
     }
 
     /**

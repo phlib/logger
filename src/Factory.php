@@ -11,10 +11,7 @@ use Psr\Log\LoggerInterface;
  */
 class Factory
 {
-    /**
-     * @var array
-     */
-    private $decorators = [
+    private array $decorators = [
         'defaultContext' => \Phlib\Logger\Decorator\DefaultContext::class,
         'level' => \Phlib\Logger\Decorator\LevelFilter::class,
     ];
@@ -58,9 +55,7 @@ class Factory
         }
         $logger = $this->{$methodName}($name, $config);
 
-        $logger = $this->applyDecorators($logger, $config);
-
-        return $logger;
+        return $this->applyDecorators($logger, $config);
     }
 
     private function applyDecorators(LoggerInterface $logger, array $config): LoggerInterface
