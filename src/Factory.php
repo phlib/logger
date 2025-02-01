@@ -108,6 +108,8 @@ class Factory
         $transport = new \Gelf\Transport\UdpTransport($host, $port);
         $messagePublisher = new \Gelf\Publisher($transport);
 
-        return new \Gelf\Logger($messagePublisher, $name);
+        return new \Gelf\Logger($messagePublisher, [
+            'facility' => $name,
+        ]);
     }
 }
