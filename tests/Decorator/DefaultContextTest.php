@@ -28,7 +28,7 @@ class DefaultContextTest extends TestCase
             ->with(
                 static::anything(),
                 static::anything(),
-                $expected
+                $expected,
             );
 
         $decorator = new DefaultContext($loggerInterface, $defaultContext);

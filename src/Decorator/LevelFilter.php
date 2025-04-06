@@ -40,8 +40,8 @@ class LevelFilter extends AbstractDecorator
             throw new InvalidArgumentException(
                 sprintf(
                     'Cannot use logging level "%s"',
-                    $level
-                )
+                    $level,
+                ),
             );
         }
         $this->logLevel = $logLevel;
@@ -58,8 +58,8 @@ class LevelFilter extends AbstractDecorator
             throw new InvalidArgumentException(
                 sprintf(
                     'Cannot use unknown logging level "%s"',
-                    $level
-                )
+                    $level,
+                ),
             );
         }
         if ($levelCode > $this->logLevel) {

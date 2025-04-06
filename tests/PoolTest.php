@@ -114,7 +114,7 @@ class PoolTest extends TestCase
             ->method('createLogger')
             ->with(
                 static::equalTo('test'),
-                static::equalTo($loggerConfig)
+                static::equalTo($loggerConfig),
             )
             ->will(static::returnValue($streamLogger));
         $factory->expects(static::once())
@@ -123,7 +123,7 @@ class PoolTest extends TestCase
                 static::equalTo('test'),
                 static::equalTo([
                     'loggers' => [$streamLogger],
-                ])
+                ]),
             )
             ->will(static::returnValue($collectionLogger));
 
