@@ -90,7 +90,11 @@ class Stream extends AbstractLogger
             $context['exception'] = (string)$context['exception'];
         }
 
-        return json_encode($context, JSON_UNESCAPED_SLASHES);
+        try {
+            return json_encode($context, JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            return 'Unable to format context: ' . $e->getMessage();
+        }
     }
 
     /**

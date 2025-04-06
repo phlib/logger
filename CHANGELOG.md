@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Handle JSON-encode errors in stream logger context.
 
 ## [5.0.0] - 2025-02-01
 ### Added
